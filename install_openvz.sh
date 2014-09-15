@@ -3,6 +3,9 @@
 
 meta_dir="./meta"
 
+export http_proxy="proxy.iiit.ac.in:8080"
+export https_proxy="proxy.iiit.ac.in:8080"
+
 echo "Setting up OpenVZ repo.."
 #wget -P /etc/yum.repos.d/ http://ftp.openvz.org/openvz.repo
 cp $meta_dir/openvz.repo /etc/yum.repos.d/openvz.repo

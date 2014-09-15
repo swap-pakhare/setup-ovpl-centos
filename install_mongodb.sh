@@ -3,6 +3,9 @@
 
 meta_dir="./meta"
 
+export http_proxy="proxy.iiit.ac.in:8080"
+export https_proxy="proxy.iiit.ac.in:8080"
+
 echo "Setting up MongoDB repo.."
 cp $meta_dir/mongodb.repo /etc/yum.repos.d/mongodb.repo
 
