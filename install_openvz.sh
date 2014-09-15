@@ -8,7 +8,7 @@ echo "Setting up OpenVZ repo.."
 cp $meta_dir/openvz.repo /etc/yum.repos.d/openvz.repo
 rpm --import http://ftp.openvz.org/RPM-GPG-Key-OpenVZ
 
-yum -y update
+#yum -y update
 
 echo "Installing the OpenVZ kernel.."
 yum -y install vzkernel
