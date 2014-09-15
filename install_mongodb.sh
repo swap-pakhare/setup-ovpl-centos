@@ -11,4 +11,7 @@ cp $meta_dir/mongodb.repo /etc/yum.repos.d/mongodb.repo
 echo "Installing MongoDB.."
 yum -y install mongodb-org
 
+echo "Starting mongod service.."
+service mongod start
+
 exit 0
