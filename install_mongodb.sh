@@ -3,17 +3,16 @@
 
 meta_dir="./meta"
 
-export http_proxy="proxy.iiit.ac.in:8080"
-export https_proxy="proxy.iiit.ac.in:8080"
-
+echo ""
 echo "Setting up MongoDB repo.."
 cp $meta_dir/mongodb.repo /etc/yum.repos.d/mongodb.repo
 
-#yum -y update
 
+echo ""
 echo "Installing MongoDB.."
 yum -y install mongodb-org
 
+echo ""
 echo "Starting mongod service.."
 service mongod start
 

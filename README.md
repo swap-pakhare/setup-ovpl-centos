@@ -10,13 +10,21 @@ It installs dependencies, OpenVZ, MongoDB and finally OVPL.
 Pre-requisite
 -------------
 
-Obtain the OS image files and repo files from some co-ordinator.
-You should get a directory named `meta`.
+- Edit the config file and put appropriate proxy settings in it. If there is no
+  proxy to be set, leave it blank.
 
-Place it in this directory.
+- Obtain VZ template OS file(ubuntu-12.04-custom-x86_64.tar.gz) from VLEAD.
+  Copy it in the `meta` folder in this directory.
+
 
 Running
 -------
 
 To run, execute the `centos_prepare_ovpl.sh`:
+
 `$ ./centos_prepare_ovpl.sh`
+
+This is will install OVPL and all its dependencies.
+After this completes, reboot the system to make sure you are booted into the
+OpenVZ kernel.
+Then, start the OVPL services.
