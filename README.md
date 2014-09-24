@@ -27,4 +27,4 @@ To run, execute the `centos_prepare_ovpl.sh`:
 This is will install OVPL and all its dependencies.
 After this completes, reboot the system to make sure you are booted into the
 OpenVZ kernel.
-Then, start the OVPL services.
+Then, start the OVPL services. (run make from /root/ovpl/src)
