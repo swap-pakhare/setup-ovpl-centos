@@ -1,0 +1,69 @@
+#+Title:  Introduction to OpenVZ
+#+Author: Jayanth Sagar T and Yogesh Aggarwal
+#+Date:   [2014-09-16 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+
+* Checkpoints
+
++ Introduction to virtualization
++ Openvz running
++ Container creation
+
+The documentation of openVZ can be found at:
+#+begin_src shell
+http://openvz.org/Main_Page
+#+end_src
+
+
+* What is Virtualization?
+
++ Method of dividing computer resources
++ Multiple isolated environments
++ Types
++ Emulation
++ Paravirtualization
++ OS level virtualization
+
+
+* Operating System level virtualization
+
++ Multiple isolated execution environments within a single OS kernel
++ Doesnot allow to run different kernels from different OSs at the same time
++ Best possible performance
++ Examples: OpenVZ, Linux-VServer
+
+* Virtual Environment / Container
+
++ Look and feel of separate physical server
++ VE has its own
++ Process tree with init
++ File system
++ Network interfaces with IP addresses, Firewall rules, Routing tables
++ Multiple VEs co-exist within a single physical server.
++ Different VEs can run different Linux distros
++ But, all VEs operate under same kernel
+
+* OpenVZ kernel
+
+Modified Linux based kernel which comes with following functionalities
++ Virtualization and Isolation
++ Enables many VEs within a single kernel
++ Resource management: Manages CPU, RAM, Disk space per VE basis
++ Checkpointing: Freezing a VE, Saving its state to disk with ability to unfreeze that state later
+
+* OpenVZ vs VMware/virtualbox
+
++ Virtualbox - Hardware assisted
++ OpenVZ - OS level virtualization
+
+* Demo on OpenVZ
+
++ Vzctl
++ create 
++ start
++ set
++ reset
++ status
++ enter
++ stop
++ Vzlist 
