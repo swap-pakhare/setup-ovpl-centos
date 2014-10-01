@@ -11,7 +11,7 @@ if [[ $UID -ne 0 ]]; then
 fi
 
 # check if meta directory exists
-if [[ ! -d "./meta" ]]; then
+if [[ ! -d "../meta" ]]; then
   echo ""
   echo "You don't have the necessary files."
   echo "Please contact the author of the script."
@@ -19,7 +19,7 @@ if [[ ! -d "./meta" ]]; then
 fi
 
 # read proxy settings from config file
-source ./config
+source ./config.sh
 if [[ -n $http_proxy ]]; then
   export http_proxy=$http_proxy
 fi
@@ -45,13 +45,6 @@ fi
 if [ $? -ne 0 ]; then
   echo ""
   echo "Error installing MongoDB. Quitting!"
-  exit 1
-fi
-
-./install_ovpl.sh
-if [ $? -ne 0 ]; then
-  echo ""
-  echo "Error installing OVPL. Quitting!"
   exit 1
 fi
 

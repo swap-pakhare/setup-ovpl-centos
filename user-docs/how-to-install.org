@@ -1,0 +1,83 @@
+#+title:  How to Setup Centos as a Virtual Lab deployment platform
+
+* Objective
+
+The objective of these instructions is to set up the =Centos= on your
+machine as a virtual lab deployment platform.
+
+* Prerequisites
+
+** Your machine has CentOS version =6.5= or greater running on it. 
+
+You can know that by typing
+#+BEGIN_example
+cat /etc/issue
+#+END_example
+
+The output should be 
+#+BEGIN_EXAMPLE
+CentOS release 6.5 (Final)
+#+END_EXAMPLE
+
+** Your machine has a 64 bit architecture
+
+To find out, type
+#+BEGIN_example
+grep flags /proc/cpuinfo
+#+END_example
+
+
+The output should include the word "lm" (for long mode, indicating 64
+bit) as one of the flags.
+
+#+BEGIN_EXAMPLE
+flags : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov
+pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe nx rdtscp *lm*
+constant_tsc arch_perfmon pebs bts xtopology nonstop_tsc aperfmperf
+pni dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1
+sse4_2 popcnt lahf_lm arat dtherm tpr_shadow vnmi flexpriority ept
+vpid
+#+END_EXAMPLE
+
+** You are logged in as root
+Be careful!  Reckless execution of commands could make your machine
+inoperable!.
+
+* Clone the repository
+
+Clone the =setup-ovpl-centos= repository in an appropriate directory
+if you already have not:
+
+#+BEGIN_EXAMPLE
+git clone https://github.com/vlead/setup-ovpl-centos.git
+cd setup-ovpl-centos
+#+END_EXAMPLE
+
+* Edit the configurations
+** Edit =config.sh=
+
+#+BEGIN_EXAMPLE
+cd scripts
+vim config.sh
+#+END_EXAMPLE
+
+Edit the config file to set the =http_proxy= and =https_proxy= fields.
+If there is no proxies to be set, leave the fields unchanged.
+
+* Get the =openVZ= template
+
+=cd= to the =meta= directory.  Download the  openVZ template OS:
+#+begin_example
+cd ../meta  
+wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-x86_64.tar.gz
+#+end_example
+
+* Run the script to prepare centos
+#+BEGIN_EXAMPLE
+cd ../scripts
+./centos_prepare_ovpl.sh
+#+END_EXAMPLE
+
+
+
+

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-meta_dir="./meta"
+meta_dir="../meta"
 
 echo ""
 echo "Setting up EPEL repo.."

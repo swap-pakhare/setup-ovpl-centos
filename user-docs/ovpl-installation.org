@@ -4,14 +4,6 @@
 #+SETUPFILE: ./org-templates/level-0.org
 
 
-* Pre-requisites
-Edit the config file with appropriate proxy settings. To be left blank, if there is no proxy to be set.
-
-Next,obtain opneVZ template OS file(ubuntu-12.04-custom-x86_64.tar.gz) from:
-#+begin_src shell
- community.virtual-labs.ac.in/downloads/
-#+end_src 
-place it in meta directory.
 
 * Setting Up OVPL for CentOS
 In the scripts directory, "centos_prepare_ovpl.sh" will set up the OVPL on Your CentOS.
