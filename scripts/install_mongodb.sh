@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script to setup repo and install MongoDB
 
-meta_dir="./meta"
+meta_dir="../meta"
 
 echo ""
 echo "Setting up MongoDB repo.."

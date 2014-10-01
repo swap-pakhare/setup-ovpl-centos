@@ -20,13 +20,16 @@ fi
 
 # read proxy settings from config file
 source ./config.sh
+
 if [[ -n $http_proxy ]]; then
+  echo $http_proxy
   export http_proxy=$http_proxy
 fi
 if [[ -n $https_proxy ]]; then
   export https_proxy=$https_proxy
 fi
 
+echo "Invoking install_dependencies.sh"
 ./install_dependencies.sh
 if [ $? -ne 0 ]; then
   echo ""
@@ -34,6 +37,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+echo "Invoking install_openvz.sh"
 ./install_openvz.sh
 if [ $? -ne 0 ]; then
   echo ""
@@ -41,6 +45,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+echo "Invoking install_mongodb.sh"
 ./install_mongodb.sh
 if [ $? -ne 0 ]; then
   echo ""

@@ -1,8 +1,9 @@
 #!/bin/bash
 # Script to setup OpenVZ repo, install and configure OpenVZ
 
-meta_dir="./meta"
+meta_dir="../meta"
 vz_template_file="ubuntu-12.04-custom-x86_64.tar.gz"
+
 
 echo ""
 echo "Setting up OpenVZ repo.."

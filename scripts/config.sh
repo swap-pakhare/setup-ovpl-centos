@@ -5,7 +5,7 @@
 # E.g.,
 # http_proxy="http://vlead.vlabs.ac.in:8080"
 # Note the port number after the second (:). 
-http_proxy=""
+export http_proxy="http://proxy.vlabs.ac.in:8080"
 
 #set your https proxy.  Similar to the above.
-https_proxy=""
+export https_proxy="http://proxy.vlabs.ac.in:8080"
