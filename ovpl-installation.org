@@ -1,4 +1,4 @@
-y#+Title:  OVPL Installation Process
+#+Title:  OVPL Installation Process
 #+Author: Thirumal R and Anon Ray
 #+Date:   [2014-09-16 Tue]
 #+SETUPFILE: ./org-templates/level-0.org
