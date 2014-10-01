@@ -5,9 +5,13 @@ echo "Fetching OVPL from GitHub.."
 cd /root
 git clone https://github.com/vlead/ovpl.git
 
-echo ""
-echo "Installing OVPL.."
 cd ovpl
+echo "changed to OVPL directory.."
+echo "Checking out version v1.0.0 .."
+git checkout tags/v1.0.0
+echo ""
+
+echo "Installing OVPL.."
 python setup.py install
 
 echo ""
