@@ -13,7 +13,7 @@ Pre-requisite
 - Edit the config file and put appropriate proxy settings in it. If there is no
   proxy to be set, leave it blank.
 
-- Obtain VZ template OS file(ubuntu-12.04-custom-x86_64.tar.gz) from VLEAD.
+- Obtain VZ template OS file(ubuntu-12.04-custom-x86_64.tar.gz) from [Community](http://community.virtual-labs.ac.in/downloads/).
   Copy it in the `meta` folder in this directory.
 
 
