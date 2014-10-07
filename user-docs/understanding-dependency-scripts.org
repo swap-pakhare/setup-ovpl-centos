@@ -4,18 +4,30 @@
 #+SETUPFILE: ./org-templates/level-0.org
 
 * Understanding of openvz-install Script File
-*Introduction :* The script (openvz-install.sh) installs the following packages.
-- *vzkernel* (OpenvVZ kernel)
-- *vzctl vzquota ploop* (OpenVZ tools)
-- *SELINUX will be disabled*
+
+The script =openvz-install.sh= installs the following packages:
+- vzkernel ::  (OpenvVZ kernel)
+- vzctl,  vzquota, and  ploop :: (OpenVZ tools)
+
+In addition, the installation script disables SELINUX.
  
 * Understanding of dependencies Script File
 
-*Introduction :* The script (dependencies.sh) installs the following packages.
-- *Git* - Distributed Version Control System.
-- *Python & development tools*
-- *MongoDB* - Database for storing information.
-- *Pymongo* - Driver for torando to connect MongoDB.
-- *Tornado* - It is a scalable, non-blocking web server and web application framework written in Python.
-- *Netaddr* - It is a Python library for representing and manipulating network addresses.
-- *Backports* - Which authenticates the hostname you are trying to connect.
+The script (dependencies.sh) installs the following packages:
+
+- Git :: Distributed Version Control System.
+
+- Python & development tools ::
+
+    + MongoDB  :: Database for storing information.
+
+    + Pymongo  :: Driver for torando to connect MongoDB
+
+    + Tornado  :: It is a scalable, non-blocking web server and web
+                  application framework written in Python.
+
+    + Netaddr :: It is a Python library for representing and
+                  manipulating network addresses.
+
+    + Backports :: Which authenticates the hostname you are trying to
+                   connect.

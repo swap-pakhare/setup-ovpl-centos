@@ -1,4 +1,17 @@
 #+title:  How to Setup Centos as a Virtual Lab deployment platform
+#+Author: Thirumal Ravula and Venkatesh Choppella
+#+Date:   [2014-10-01 Wed]
+
+#+SETUPFILE: ./org-templates/level-0.org
+#+LINK_HOME: ./index.html
+#+LINK_UP:   ./index.html
+
+#+OPTIONS: LaTeX:t          Do the right thing automatically (MathJax)
+
+#+PROPERTY: results output
+#+PROPERTY: tangle no
+#+PROPERTY: exports code
+#+PROPERTY: eval no
 
 * Objective
 
@@ -39,11 +52,18 @@ sse4_2 popcnt lahf_lm arat dtherm tpr_shadow vnmi flexpriority ept
 vpid
 #+END_EXAMPLE
 
-** You are logged in as root
-Be careful!  Reckless execution of commands could make your machine
-inoperable!.
+** You are on the internet
 
-* Clone the repository
+The installation pulls packages from open repositories and you will need
+an internet connection to run the scripts successfully. 
+
+** You have root sudo permissions as root
+The scripts run with root permissions and you are expected to invoke
+the script with a =sudo= command.  Be careful!  Reckless execution of
+commands with root permission could make your machine inoperable!.
+
+* Instructions for installation
+** Clone the repository
 
 Clone the =setup-ovpl-centos= repository in an appropriate directory
 if you already have not:
@@ -53,8 +73,8 @@ git clone https://github.com/vlead/setup-ovpl-centos.git
 cd setup-ovpl-centos
 #+END_EXAMPLE
 
-* Edit the configurations
-** Edit =config.sh=
+** Edit the configurations
+*** Edit =config.sh=
 
 #+BEGIN_EXAMPLE
 cd scripts
@@ -64,7 +84,7 @@ vim config.sh
 Edit the config file to set the =http_proxy= and =https_proxy= fields.
 If there is no proxies to be set, leave the fields unchanged.
 
-* Get the =openVZ= template
+** Get the =openVZ= template
 
 =cd= to the =meta= directory.  Download the  openVZ template OS:
 #+begin_example
@@ -72,11 +92,13 @@ cd ../meta
 wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-x86_64.tar.gz
 #+end_example
 
-* Run the script to prepare centos
+** Run the script to prepare centos
 #+BEGIN_EXAMPLE
 cd ../scripts
-./centos_prepare_ovpl.sh
+sudo root  ./centos_prepare_ovpl.sh
 #+END_EXAMPLE
+
+* Testing your installation
 
 
 

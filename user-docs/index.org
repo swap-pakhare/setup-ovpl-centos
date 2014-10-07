@@ -1,0 +1,19 @@
+#+title:  User manuals and documentation for Centos Virtual Labs platform
+#+SETUPFILE: ./org-templates/level-0.org
+
+* Introduction
+
+This is the opening page of the User level documentation for the
+Centos Virtual Labs platform installation and configuration.
+
+You will find documentation on the following (just click on them!)
+
+
+- [[./how-to-install.org][How to Setup Centos as a Virtual Lab Deployment Platform]]  ::
+     contains instructions on setting CentOS machine as a virtual
+     lab deployment platform. 
+
+- [[./faq.org][FAQ on CentOS and  Python]] :: Common questions about CentOS and
+     Python module installation.
+
+- [[./intro-to-openvz.org][Introduction to OpenVZ]] :: An introduction to virtualization with OpenVZ.

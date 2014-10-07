@@ -9,10 +9,11 @@
 + Openvz running
 + Container creation
 
-The documentation of openVZ can be found at:
-#+begin_src shell
+The documentation of openVZ can be found at
+
+#+begin_example
 http://openvz.org/Main_Page
-#+end_src
+#+end_example
 
 
 * What is Virtualization?

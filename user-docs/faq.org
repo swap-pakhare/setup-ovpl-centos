@@ -1,47 +1,47 @@
-#+Title:  Frequently Asked Questions
+#+Title:  FAQ on CentOS and  Python
 #+Author: Prakash B Hegade, Amulya Sri
 #+Date:   [2014-09-16 Tue]
 #+SETUPFILE: ./org-templates/level-0.org
 
-* Generic Queries
+* General questions about CentOS
 
 ** How to give read-write-execute permissions to a file?
-#+begin_src shell
+#+begin_example
 chmod 0777 fileName
-#+end_src
+#+end_example
 
 ** How can I install packages using package manager (CentOS) ?
-#+begin_src shell
+#+begin_example
 yum install packageName
-#+end_src
+#+end_example
 
 ** How can I copy file from remote system ?
 We can copy file from remote system using scp. 
-#+begin_src shell
+#+begin_example
 scp path-to-source-file user@ip:/path-to-destination
-#+end_src
+#+end_example
 
 
 ** I was getting error saying, Permission Denied. What should I do?
 Try running the command with sudo.
 For example, 
-#+begin_src shell
+#+begin_example
 sudo yum install pip
-#+end_src
+#+end_example
 
 
-** After i run a file, i get error stating that, process is running already. How should I kill that process ?
-#+begin_src shell
+** After I run a file, I get error stating that, process is running already. How should I kill that process ?
+#+begin_example
 ps -ef |grep "NameofProcess"
-#+end_src
+#+end_example
 
 Notice the process ID and kill it using:
-#+begin_src shell
+#+begin_example
 kill -9 process-id
-#+end_src
+#+end_example
 
 
-* OVPL Dependencies 
+* Python related questions
 ** What is mongodb? Why should I install it?
 MongoDB is a document database that provides high performance, high availability, and easy scalability. 
 Documents (objects) map well with programming language data types.
@@ -69,9 +69,9 @@ By using non-blocking network I/O, Tornado can scale to tens of thousands of ope
 
 ** I got an error like, 'No module named requests' What should I do now?
 You can install python modules either downloading tar and extracting it (or) by using pip, by running the command,
-#+begin_src shell
+#+begin_example
 pip install requests
-#+end_src
+#+end_example
 
 
 ** What is requests module in Python?
@@ -80,7 +80,7 @@ Requests is an Apache2 Licensed HTTP library, written in Python.
 ** How do I install pip in centos?
 We can install pip using package manager or by downloading get-pip.py and running it.
 Using Package manager :
-#+begin_src shell
+#+begin_example 
 sudo yum install python-pip
-#+end_src
+#+end_example
 

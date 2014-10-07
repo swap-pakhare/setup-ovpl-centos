@@ -3,7 +3,6 @@
 # value
 
 # E.g.,
-# http_proxy="http://vlead.vlabs.ac.in:8080"
 # Note the port number after the second (:). 
 export http_proxy="http://proxy.vlabs.ac.in:8080"
 
