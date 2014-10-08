@@ -44,9 +44,9 @@ install_mongodb.sh
 
 
 * Installing OVPL 
-Finally, OVPL source is cloned and installed using the script:
+Finally, start the OVPL services by running make
 #+begin_src shell
-install_ovpl.sh
+make
 #+end_src
 
 * Deploying the Lab
