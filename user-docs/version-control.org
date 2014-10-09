@@ -3,41 +3,44 @@
 #+Date:   [2014-09-16 Tue]
 #+SETUPFILE: ./org-templates/level-0.org
 
+* Objective
+The objective of this presentation is to give the idea and purpose of version control and how "GitHub" can be used as a  version control tool.
 
-* Agenda
-- Understand Version Control
-- GitHub for Version Control
-- GitHub – Basic Commands
+Understanding version control is pre-requisite for all the tasks which will be carried out ahead. If you are already familiar with the topic you can skip through this presentation.
 
 Lets Git this party started!
 
-* Objectives
 
-At the end of the session you will be able to:
+* Agenda
+The outcome of this presentation is to
 - Realize the importance of version control
 - Have an account in GitHub
 - Have GitHub commands at finger tips
 
-* Our Environment
-- Has Timely code releases
+* Our Work Environment
+Our work environment is generally accompanied by,
+- Timely code releases
 - Multiple developers working together
 - Code Reverts and Changes
-- Who is keeping track of changes?
+
+The biggest challenge in such working condition is tracking the changes of the work carried out. That is how version control comes into picture.
 
 * Version Control
-- Log every version
-- Know the difference between each
+Version control is defined to have the following features:
+- Facility to log every version
+- Ability to differentiate between several versions
 - Revert to required version
-- Better Collaboration
-- Easy Transfer
-- Facilitates Backup
+- To provide a better Collaboration amongst working team
+- Convenient way of sharing data
+- Facilitating Backup of all the versions produced
+
 
 * GitHub
+GitHub is one of the version control tools.
 - Since 2008
 - A code sharing and publishing service
 - A social networking site for programmers
-Find the documentation at:
-#+begin_src shell
-https://help.github.com/articles/set-up-git
-#+end_src
 
+Find the documentation of GitHub and Tutorials for usage at:
+
+[[https://help.github.com/articles/set-up-git][GitHub Tutorials]]
