@@ -3,11 +3,17 @@
 
 * Introduction
 
-This is the opening page of the User level documentation for the
-Centos Virtual Labs platform installation and configuration.
+This is the opening page of the User level documentation for the Centos Virtual Labs platform installation and configuration.
 
-You will find documentation on the following (just click on them!)
+Pre-requisite:
+We make the following assumptions before you go ahead with the setup and deployment process
+- You are ready with a system installed with CentOS 6.5
+- Familiar with open source environment
+- Basic understanding of Virtualization
+- Ease of working with web technologies like html, javascript etc.
 
+Browsing over the "user-docs", 
+you will find documentation on the followig:
 
 - [[./setup-centos.org][How to Setup Centos as a Virtual Lab Deployment Platform]]  ::
     Contains instructions on setting CentOS machine as a virtual
