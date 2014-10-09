@@ -5,9 +5,14 @@
 
 This is the opening page of the User level documentation for the Centos Virtual Labs platform installation and configuration.
 
-Pre-requisite:
-We make the following assumptions before you go ahead with the setup and deployment process
-- You are ready with a system installed with CentOS 6.5
+* Pre-requisite
+
+We make the following assumptions before you go ahead with the setup and deployment process:
+You Have: 
+- A system equiped and installed with CentOS 6.5
+
+
+Also:
 - Familiar with open source environment
 - Basic understanding of Virtualization
 - Ease of working with web technologies like html, javascript etc.
@@ -19,7 +24,7 @@ you will find documentation on the followig:
     Contains instructions on setting CentOS machine as a virtual
     lab deployment platform.
 
-- [[./faq.org][FAQ on CentOS and  Python]] :: 
+- [[./faq.org][FAQ on CentOS and OVPL Installation]] :: 
     Common questions about CentOS and Python module installation.
 
 
