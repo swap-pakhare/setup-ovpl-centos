@@ -1,7 +1,10 @@
-#+Title:  FAQ on CentOS and  Python
+#+Title:  FAQ on CentOS and  OVPL Installation
 #+Author: Prakash B Hegade, Amulya Sri
 #+Date:   [2014-09-16 Tue]
 #+SETUPFILE: ./org-templates/level-0.org
+
+* Objective
+This document answers the common questions relating to CentOS basics and OVPL Installation. It also gives brief description of the dependencies to be installed to set up OVPL.
 
 * General questions about CentOS
 
