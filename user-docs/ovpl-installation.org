@@ -4,6 +4,13 @@
 #+SETUPFILE: ./org-templates/level-0.org
 
 
+* Objective 
+This presentation guides through the process of OVPL Installation process.
+
+Pre-requisites:
+- System with CentOS 6.5 successfully installed
+(It is assumed that CentOS is installed on a separate partition of your disk)
+
 
 * Setting Up OVPL for CentOS
 In the scripts directory, "centos_prepare_ovpl.sh" will set up the OVPL on Your CentOS.
