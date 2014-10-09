@@ -16,7 +16,7 @@ You Have:
 Also:
 - Familiar with open source environment
 - Basic understanding of Virtualization
-- Ease of working with web technologies like html, javascript etc.
+- Ease of working with web technologies like HTML, JavaScript etc.
 
 Browsing over the "user-docs", 
 you will find documentation on the followig:
