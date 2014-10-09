@@ -3,68 +3,105 @@
 #+Date:   [2014-09-16 Tue]
 #+SETUPFILE: ./org-templates/level-0.org
 
-* Checkpoints
-
-+ Introduction to virtualization
-+ Openvz running
-+ Container creation
-
-The documentation of openVZ can be found at
-
-#+begin_example
-http://openvz.org/Main_Page
-#+end_example
-
-
 * What is Virtualization?
 
-+ Method of dividing computer resources
-+ Multiple isolated environments
-+ Types
-+ Emulation
-+ Paravirtualization
-+ OS level virtualization
++ Virtualization is a framework or methodology of dividing the resources of a computer into multiple execution environments. Virtualization techniques create multiple isolated partitions such as Virtual Machines (VM) or Virtual Environments (VEs) on a single physical server. 
++ Virtualization refers to the abstraction of computer resources. It is "a technique for hiding the physical characteristics of computing resources from the way in which other systems, applications, or end users interact with those resources. This involves making a single physical resource (such as a server, an operating system, an application, or storage device) function as multiple logical resources; or it can involve making multiple physical resources (such as storage devices or servers) appear as a single logical resource."
++ The common theme of all virtualization technologies is the hiding of technical detail through encapsulation. Virtualization creates an external interface that hides an underlying implementation by multiplexing access, by combining resources at different physical locations, or by simplifying a control system.
+[[../img/befor and after virtualiation.png]]
 
+* Types of Virtualization
 
-* Operating System level virtualization
+1. *Full virtualization*: This involves almost complete simulation of the actual hardware to allow software of a guest operating system to run unmodified.
+2. *Partial virtualization*: In this scenario, some but not all the target environment is simulated. Some guest programs may need modifications to run in this virtual environment.
+3. *Paravirtualization*: In this environment, a hardware environment is not simulated. However, the guest programs are executed in their own isolated domains as if they are running on a separate system. Guest programs need to be specifically modified to run in this environment.
 
-+ Multiple isolated execution environments within a single OS kernel
-+ Doesnot allow to run different kernels from different OSs at the same time
-+ Best possible performance
-+ Examples: OpenVZ, Linux-VServer
+* Operating System-level Virtualization
 
-* Virtual Environment / Container
++ Operating system-level virtualization is a server virtualization method where the kernel of an operating system allows multiple isolated user space instances instead of just one. Such instances often called containers, virtualization engines (VE), virtual private servers (VPS) or FreeBSD jail(jails) may look and feel like a real server from the point of view of its owners and users. On Unix-like operating systems, this technology can be seen as an advanced implementation of the standard chroot mechanism. In addition to isolation mechanisms, the kernel often provides resource management features to limit the impact of one container's activities on the other containers. Virtual labs architecture uses OS level virtualization software called OpenVZ.
 
-+ Look and feel of separate physical server
-+ VE has its own
-+ Process tree with init
-+ File system
-+ Network interfaces with IP addresses, Firewall rules, Routing tables
-+ Multiple VEs co-exist within a single physical server.
-+ Different VEs can run different Linux distros
-+ But, all VEs operate under same kernel
+* Open VZ
+
++ OpenVZ is container-based virtualization for Linux. OpenVZ creates multiple secure, isolated Linux containers (otherwise known as VEs or VPSs) on a single physical server enabling better server utilization and ensuring that applications do not conflict.
++ Each container performs and executes exactly like a stand-alone server; a container can be rebooted independently and have root access, users, IP addresses, memory, processes, files, applications, system libraries and configuration files.
+ 
+* Container
+
++ A container (otherwise known as CT, Virtual Environment (VE), Virtual Private Server (VPS) etc.) is one of the main concepts of OpenVZ.
++ Container is an isolated entity which performs and executes exactly like a stand-alone server. Container can be rebooted independently and have root access, users/groups, IP address(es), memory, processes, files, applications, system libraries and configuration files.
++ OpenVZ supports multiple CTs (as many as several hundreds) on a single Hardware Node. 
+
+* OpenVZ Installation
+ The following link briefly describes the steps needed to install OpenVZ on a CentOS 6 machine.
+
++  [[https://openvz.org/Quick_installation ][OpenVZ quick Installation manual]]
 
 * OpenVZ kernel
 
-Modified Linux based kernel which comes with following functionalities
-+ Virtualization and Isolation
-+ Enables many VEs within a single kernel
-+ Resource management: Manages CPU, RAM, Disk space per VE basis
-+ Checkpointing: Freezing a VE, Saving its state to disk with ability to unfreeze that state later
+*OpenVZ kernel is a modified Linux-based kernel that has the following functionalities:*
+** Virtualization and Isolation
+*Each container is a separate entity, and behaves largely as a physical server would. Each has its own:*
 
-* OpenVZ vs VMware/virtualbox
+**** Files
+    System libraries, applications, virtualized /proc and /sys, virtualized locks, etc.
 
-+ Virtualbox - Hardware assisted
-+ OpenVZ - OS level virtualization
+**** Users and groups
+    Each container has its own root user, as well as other users and groups.
 
-* Demo on OpenVZ
+**** Process tree
+    A container only sees its own processes (starting from init). PIDs are virtualized, so that the init PID is 1 as it should be.
 
-+ Vzctl
-+ create 
-+ start
-+ set
-+ reset
-+ status
-+ enter
-+ stop
-+ Vzlist 
+**** Network
+    Virtual network device, which allows a container to have its own IP addresses, as well as a set of netfilter (iptables), and routing rules.
+
+**** Devices
+    If needed, any container can be granted access to real devices like network interfaces, serial ports, disk partitions, etc.
+
+**** IPC objects
+    Shared memory, semaphores, messages. 
+** Enables many VEs within a single kernel
+Many number of containers can be created on top of single OpenVZ kernel. 
+** Resource management: The OpenVZ kernel manages CPU, RAM, Disk space on a per VE basis
+*- OpenVZ resource management is a set of controls providing per-container resource accounting and limiting.*\\ 
+*- This is required for multiple containers to coexist gracefully on a single host system.*\\
+*- OpenVZ resource management includes these four primary controllers:*\\
++ User beancounters (and VSwap)
++ Disk quota
++ CPU Fair scheduler
++ I/O priorities and I/O limits
+** Checkpointing
++ This functionality involves freezing a VE, saving its state to disk with the ability to unfreeze the state later.
+
+* Commands used in OpenVZ
+Some of the commonly used OpenVZ commands are described below.\\
+*To list all the running containers:*   
+#+BEGIN_SRC <SHELL>
+vzlist
+#+END_SRC
+*creating a container:*
+#+BEGIN_SRC <SHELL>
+vzctl create CTID --parameter value [...]
+#+END_SRC
+*Starting a container:* 
+#+BEGIN_SRC <SHELL>
+vzctl start CTID [--wait] [--force] [--skip-fsck]
+#+END_SRC 
+*Setting parameters to a container:* 
+#+BEGIN_SRC <SHELL>
+vzctl set CTID --parameter value [...] [--save] [--force] [--setmode restart|ignore]
+#+END_SRC
+*Checking status of a container:* 
+#+BEGIN_SRC <SHELL>
+vzctl status CTID
+#+END_SRC
+*Entering into a container:* 
+#+BEGIN_SRC <SHELL>
+vzctl enter CTID
+#+END_SRC
+*Stopping a container:* 
+#+BEGIN_SRC <SHELL>
+vzctl stop CTID
+#+END_SRC
+
+
+[[https://openvz.org/Man/vzctl.8 ][Visit Man page to know about all OpenVZ commands in detail]] 
