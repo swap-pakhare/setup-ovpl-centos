@@ -2,7 +2,7 @@
 ;;; http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
 
 
-(setq org-export-html-postamble nil)
+;; (setq org-export-html-postamble nil)
 
 ;;; default-dir is the directory from where the emacs to run this script is called. 
 (defvar base-dir default-directory)

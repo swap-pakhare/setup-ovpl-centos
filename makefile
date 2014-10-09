@@ -15,10 +15,10 @@ publish: init
 	rsync -raz --progress ./meta ${DEST}
 
 init:
+	rm -rf ${DEST}
 	mkdir -p ${DEST}
 	mkdir -p ${DEST}${USER-DOCS}
-#	mkdir -p ${DEST}${SCRIPTS}
-#	mkdir -p ${DEST}${META}
+
 
 server:
 	python -m SimpleHTTPServer 6001
