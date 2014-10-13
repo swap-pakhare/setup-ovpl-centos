@@ -16,7 +16,7 @@ web technologies.
 
 * Documentation 
 Browsing over the "user-docs", 
-you will find documentation on the followig:
+you will find documentation on the following:
 
 - [[./setup-centos.org][How to Setup Centos as a Virtual Lab Deployment Platform]]  ::
     Contains instructions on setting CentOS machine as a virtual
