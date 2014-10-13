@@ -11,8 +11,8 @@ A system equipped and installed with CentOS 6.5 or a higher version.
 If not, the installation can be carried out through the following link:
 [[http://www.centos.org/download/][Download CentOS]] 
 
-An Integration engineer is expected to know the basic shell commands, create and delete a container in virtual environment and  
-
+An Integration engineer is expected to know the basic shell commands in CentOS 6.5, create and delete a container in openVZ virtual environment and able to work on HTML and JavaScript
+web technologies.
 
 * Documentation 
 Browsing over the "user-docs", 
