@@ -19,7 +19,7 @@ In case you do not have CentOS 6.5 or a higher version, you can install the same
 * Assumptions about Users
 For setting up OVPL on CentOS, you are expected to know how to execute basic shell commands in CentOS 6.5, create and delete a container in openVZ virtual environment, create or modify an HTML page and write a code in JavaScript.
 
-As an integration engineer, you are expected to know how to use GitHub - a subversioning tool. Here is a small tutorial to revise your concepts about GitHub. <>?? 
+As an integration engineer, you are expected to know how to use GitHub - a subversioning tool. Here is a small tutorial to revise your concepts about GitHub. [[https://github.com/vlead/setup-ovpl-centos/blob/master/user-docs/version-control.org][Version Control Basics and GitHub]]
 
 * User Documentation - What to find Where? 
 After browsing through the "user-docs", you will find documentation about the following:
