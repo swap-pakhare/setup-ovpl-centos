@@ -3,7 +3,7 @@
 
 * Introduction
 
-Welcome to the user documentation for Centos Virtual Labs platform installation and configuration. As an integration engineer, this documentation will guide you through the steps to set up OVPL on CentOS.
+Welcome to the user documentation for CentOS Virtual Labs platform installation and configuration. As an integration engineer, this documentation will guide you through the steps to set up OVPL on CentOS.
 
 * Pre-requisites for Setting-up OVPL on CentOS
 
