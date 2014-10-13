@@ -3,29 +3,33 @@
 
 * Introduction
 
-This is the opening page of the User level documentation for the Centos Virtual Labs platform installation and configuration.
+Welcome to the user documentation for Centos Virtual Labs platform installation and configuration. As an integration engineer, this documentation will guide you through the steps to set up OVPL on CentOS.
 
-* Pre-requisites for a Integration Engineer
+* Pre-requisites for Setting-up OVPL on CentOS
 
-A system equipped and installed with CentOS 6.5 or a higher version.
-If not, the installation can be carried out through the following link:
+You need to adhere to the following hardware and software requirements for setting up OVPL:
+
+- Minimum 2GB RAM
+- A dedicated partition for CentOS (version 6.5 only)
+- Minimum 50GB hard disk space
+- A dual core processor
+In case you do not have CentOS 6.5 or a higher version, you can install the same through the following link:
 [[http://www.centos.org/download/][Download CentOS]] 
 
-An Integration engineer is expected to know the basic shell commands in CentOS 6.5, create and delete a container in openVZ virtual environment and able to work on HTML and JavaScript
-web technologies.
+* Assumptions 
+For setting up OVPL on CentOS, you are expected to know how to execute basic shell commands in CentOS 6.5, create and delete a container in openVZ virtual environment, create or modify an HTML page and write a code in JavaScript.
 
-* Documentation 
-Browsing over the "user-docs", 
-you will find documentation on the following:
+* User Documentation - What to find Where? 
+After browsing through the "user-docs", you will find documentation about the following:
 
-- [[./setup-centos.org][How to Setup Centos as a Virtual Lab Deployment Platform]]  ::
-    Contains instructions on setting CentOS machine as a virtual
+- [[./setup-centos.org][How to Set Up CentOS as a Virtual Lab Deployment Platform]]  ::
+    This contains instructions about setting CentOS machine as a virtual
     lab deployment platform.
 
 - [[./faq.org][FAQ on CentOS and OVPL Installation]] :: 
-    Common questions about CentOS and Python module installation.
+    This has some frequently asked common questions about CentOS and Python module installation.
 
 
 - [[./intro-to-openvz.org][Introduction to OpenVZ]] :: 
-    An introduction to virtualization with OpenVZ.
+    This is an introduction to virtualization using OpenVZ.
      
