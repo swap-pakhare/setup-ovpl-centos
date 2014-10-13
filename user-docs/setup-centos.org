@@ -98,6 +98,12 @@ cd ../scripts
 sudo root  ./centos_prepare_ovpl.sh
 #+END_EXAMPLE
 
+** Run make to start OVPL
+#+BEGIN_EXAMPLE
+cd ../ovpl/src/
+sudo root make
+#+END_EXAMPLE
+
 * Testing your installation
 
 
