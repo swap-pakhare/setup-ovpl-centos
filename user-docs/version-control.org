@@ -8,7 +8,7 @@ The objective of this tutorial is to describe why to use version control and how
 
 Going forward, version control will be a pre-requisite for all the tasks that you will perform while setting up OVPL. Therefore, it is recommended that you browse through the tutorial below to refresh your concepts of Git.
 
-Let's Git this party started!
+Let's Git this party going!
 
 
 * Agenda
