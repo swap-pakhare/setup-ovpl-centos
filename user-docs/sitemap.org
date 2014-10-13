@@ -5,7 +5,7 @@
      + [[file:org-templates/level-1.org][level-1]]
      + [[file:org-templates/level-2.org][level-2]]
      + [[file:org-templates/level-3.org][level-3]]
-   + [[file:faq.org][FAQ on CentOS and  Python]]
+   + [[file:faq.org][FAQ on CentOS and  OVPL Installation]]
    + [[file:setup-centos.org][How to Setup Centos as a Virtual Lab deployment platform]]
    + [[file:intro-to-openvz.org][Introduction to OpenVZ]]
    + [[file:ovpl-installation.org][OVPL Installation Process]]
