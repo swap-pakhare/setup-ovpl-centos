@@ -1,4 +1,4 @@
-#+title:  User manuals and documentation for Centos Virtual Labs platform
+#+title:  User Documentation for Setting-up OVPL on CentOS
 #+SETUPFILE: ./org-templates/level-0.org
 
 * Introduction
