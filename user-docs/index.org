@@ -16,7 +16,7 @@ You need to adhere to the following hardware and software requirements for setti
 In case you do not have CentOS 6.5 or a higher version, you can install the same through the following link:
 [[http://www.centos.org/download/][Download CentOS]] 
 
-* Assumptions 
+* Assumptions about Users
 For setting up OVPL on CentOS, you are expected to know how to execute basic shell commands in CentOS 6.5, create and delete a container in openVZ virtual environment, create or modify an HTML page and write a code in JavaScript.
 
 * User Documentation - What to find Where? 
