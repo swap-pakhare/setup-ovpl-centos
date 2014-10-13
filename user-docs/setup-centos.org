@@ -1,4 +1,4 @@
-#+title:  How to Setup Centos as a Virtual Lab deployment platform
+#+title:  How to Setup CentOS as a Virtual Lab deployment platform
 #+Author: Thirumal Ravula and Venkatesh Choppella
 #+Date:   [2014-10-01 Wed]
 
