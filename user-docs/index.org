@@ -5,16 +5,16 @@
 
 This is the opening page of the User level documentation for the Centos Virtual Labs platform installation and configuration.
 
-* Pre-requisites
+* Pre-requisites for a Integration Engineer
 
-We make the following assumptions before you go ahead with the setup and deployment process:
+Following assumptions are made before going ahead with the setup and deployment process:
 
-You Have: 
-- A system equipped and installed with CentOS 6.5
+A system equipped and installed with CentOS 6.5 or a higher version.
+If not, the installation can be carried out through the following link:
+[[http://www.centos.org/download/][Download CentOS]] 
 
 
-Also:
-- Familiar with open source environment
+following technical expertise is expected from an integration engineer. Operating on the basic shell commnads on CentOS operating system 
 - Basic understanding of Virtualization
 - Ease of working with web technologies like HTML, JavaScript etc.
 
