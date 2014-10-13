@@ -7,14 +7,14 @@ This document provides the basic information about virtualization and OpenVZ - a
 \\
 *Audience of this Document*\\
 The primary audience of this document are the Integration Engineers who are involved in the Auto-Deployment process. It is assumed that the Integration Engineers are comfortable with Linux system administration.\\
-\\
+
 *System Pre-requsites*\\
 The hardware and software requirements of the systems that the Integration Engineers use for virtualization are:\\
 + Minimum 2GB RAM
 + The machine should have one dedicated partition for CentOS (version 6.5 only)
 + Minimum 50GB hard disk space
 + The machine should have a dual core processor
-\\
+
 *Assumptions*\\
 It is assumed that the Integration Engineers will have the lab sources of their respective Institutes with them.
 
