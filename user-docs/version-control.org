@@ -4,43 +4,43 @@
 #+SETUPFILE: ./org-templates/level-0.org
 
 * Objective
-The objective of this presentation is to give the idea and purpose of version control and how "GitHub" can be used as a  version control tool.
+The objective of this tutorial is to describe why to use version control and how to use "GitHub" as a  version control tool.
 
-Understanding version control is pre-requisite for all the tasks which will be carried out ahead. If you are already familiar with the topic you can skip through this presentation.
+Going forward, version control will be a pre-requisite for all the tasks that you will perform while setting up OVPL. Therefore, it is recommended that you browse through the tutorial below to refresh your concepts of Git.
 
-Lets Git this party started!
+Let's Git this party started!
 
 
 * Agenda
-The outcome of this presentation is to
+The outcome of this tutorial is to:
 - Realize the importance of version control
-- Have an account in GitHub
+- Have an account on GitHub
 - Have GitHub commands at finger tips
 
 * Our Work Environment
-Our work environment is generally accompanied by,
+Our work environment is about:
 - Timely code releases
 - Multiple developers working together
 - Code Reverts and Changes
 
-The biggest challenge in such working condition is tracking the changes of the work carried out. That is how version control comes into picture.
+The biggest challenge in such a dynamic working condition is tracking changes made by one and all. That's the reason version control comes into the picture.
 
 * Version Control
-Version control is defined to have the following features:
+Version control has the following features:
 - Facility to log every version
 - Ability to differentiate between several versions
 - Revert to required version
-- To provide a better Collaboration amongst working team
+- Provide better collaboration among working team
 - Convenient way of sharing data
-- Facilitating Backup of all the versions produced
+- Facilitate backup of all versions produced
 
 
-* GitHub
-GitHub is one of the version control tools.
-- Since 2008
-- A code sharing and publishing service
-- A social networking site for programmers
+* About GitHub
+GitHub is one of the many version control tools.
+- It has been in existence since 2008.
+- It is a code sharing and publishing service.
+- It is a social networking site for programmers.
 
-Find the documentation of GitHub and Tutorials for usage at:
+Find the documentation of GitHub and Tutorials at:
 
 [[https://help.github.com/articles/set-up-git][GitHub Tutorials]]
