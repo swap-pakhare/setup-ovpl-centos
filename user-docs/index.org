@@ -7,16 +7,12 @@ This is the opening page of the User level documentation for the Centos Virtual 
 
 * Pre-requisites for a Integration Engineer
 
-Following assumptions are made before going ahead with the setup and deployment process:
-
 A system equipped and installed with CentOS 6.5 or a higher version.
 If not, the installation can be carried out through the following link:
 [[http://www.centos.org/download/][Download CentOS]] 
 
+An Integration engineer is expected to know the basic shell commands, create and delete a container in virtual environment and  
 
-following technical expertise is expected from an integration engineer. Operating on the basic shell commnads on CentOS operating system 
-- Basic understanding of Virtualization
-- Ease of working with web technologies like HTML, JavaScript etc.
 
 * Documentation 
 Browsing over the "user-docs", 
