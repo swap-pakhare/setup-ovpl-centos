@@ -17,12 +17,6 @@ For example,
 sudo yum install pip
 #+end_example
 
-or issue a
-#+begin_example
-sudo su -
-#+end_example
-and become a super user.
-
 ** How to give read-write-execute permissions to a file?
 The permissions can be given by the following command:
 #+begin_example
