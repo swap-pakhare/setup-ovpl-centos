@@ -29,7 +29,3 @@ After browsing through the "user-docs", you will find documentation about the fo
 - [[./setup-centos.org][How to Set Up CentOS as a Virtual Lab Deployment Platform]]  ::
     This contains instructions about setting CentOS machine as a virtual
     lab deployment platform.
-
-- [[./faq.org][FAQ on CentOS and OVPL Installation]] :: 
-    This has some frequently asked common questions about CentOS and Python module installation.
-     
