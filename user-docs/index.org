@@ -17,7 +17,9 @@ In case you do not have CentOS 6.5 or a higher version, you can install the same
 [[http://www.centos.org/download/][Download CentOS]] 
 
 * Assumptions about Users
-For setting up OVPL on CentOS, you are expected to know how to execute [[https://github.com/vlead/setup-ovpl-centos/blob/master/user-docs/faq.org][basic shell commands]] in CentOS 6.5, create and delete a container in OpenVZ virtual environment, create or modify an HTML page and write a code in JavaScript. Here is a quick review material for [[http://www.w3schools.com/html/][HTML]] and [[http://www.w3schools.com/js/][JavaScript]] tutorials.
+For setting up OVPL on CentOS, you are expected to know how to execute basic shell commands in CentOS 6.5, create and delete a container in OpenVZ virtual environment, create or modify an HTML page and write a code in JavaScript. Here is a quick review material for [[http://www.w3schools.com/html/][HTML]] and [[http://www.w3schools.com/js/][JavaScript]] tutorials.
+
+A set of frequently asked questions of basic shell commands can be found [[https://github.com/vlead/setup-ovpl-centos/blob/master/user-docs/faq.org][Here]] 
 
 As an integration engineer, you are expected to know how to use GitHub - a version control tool. Here is a small tutorial to revise your concepts about [[https://github.com/vlead/setup-ovpl-centos/blob/master/user-docs/version-control.org][Version Control Basics and GitHub]].
 
