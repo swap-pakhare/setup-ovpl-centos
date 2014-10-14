@@ -1,85 +1,48 @@
-#+Title:  FAQ on CentOS and  Python
+#+Title:  FAQ on CentOS Basic Shell Commands
 #+Author: Prakash B Hegade, Amulya Sri
 #+Date:   [2014-09-16 Tue]
 #+SETUPFILE: ./org-templates/level-0.org
 
-* General questions about CentOS
+* FAQ-Basic Shell Commands
 
-** How to give read-write-execute permissions to a file?
+
+** There is Permission Denied Error. What do we resolve it?
+This error is encountered if one does not have admin privileges. To do so, run the command by prefixing a 
 #+begin_example
-chmod 0777 fileName
+sudo
 #+end_example
 
-** How can I install packages using package manager (CentOS) ?
-#+begin_example
-yum install packageName
-#+end_example
-
-** How can I copy file from remote system ?
-We can copy file from remote system using scp. 
-#+begin_example
-scp path-to-source-file user@ip:/path-to-destination
-#+end_example
-
-
-** I was getting error saying, Permission Denied. What should I do?
-Try running the command with sudo.
 For example, 
 #+begin_example
 sudo yum install pip
 #+end_example
 
-
-** After I run a file, I get error stating that, process is running already. How should I kill that process ?
+** How to give read-write-execute permissions to a file?
+The permissions can be given by the following command:
 #+begin_example
-ps -ef |grep "NameofProcess"
+chmod 0777 file-name
 #+end_example
 
-Notice the process ID and kill it using:
+** How can we install packages using package manager (CentOS) ?
+Use YUM to install packages using package manager. (YUM - Yellow Dog Manager)
+#+begin_example
+sudo yum install package-name
+#+end_example
+Check for network settings / proxy if the commnad fails. 
+
+** How can I copy file from remote system ?
+We can copy file from remote system using the command scp. 
+#+begin_example
+scp path-to-source-file user@ip:/path-to-destination
+#+end_example
+
+
+** How do we kill a running process?
+#+begin_example
+ps -ef | grep name-of-the-process
+#+end_example
+
+Now note the process-id of the process that you want to kill and issue the command:
 #+begin_example
 kill -9 process-id
-#+end_example
-
-
-* Python related questions
-** What is mongodb? Why should I install it?
-MongoDB is a document database that provides high performance, high availability, and easy scalability. 
-Documents (objects) map well with programming language data types.
-
-** What is the use of 'backports.ssl_match_hostname' package in Python?
-The Secure Sockets layer is actually secure if you check the hostname in the certificate returned by the server to which you are connecting, and verify that it matches to hostname that you are trying to reach.
-
-The ssl package in the Standard Library of Python 3.2 and greater now includes a function for performing this check instead of requiring every application to implement the check separately.
-
-** What is meant by OpenVZ?
-OpenVZ  is an operating system-level virtualization technology based on the Linux kernel and operating system. 
-
-OpenVZ allows a physical server to run multiple isolated operating system instances, called containers or Virtual Environments.
-
-** What is Python sh module?
-sh is a full-fledged subprocess replacement for Python 2.6 - 3.2 that allows you to call any program as if it were a function.
-
-** What is Python netaddr module?
-netaddr is a Python library for representing and manipulating network addresses.
-
-** What is the use of Python tornado ?
-Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed. 
-
-By using non-blocking network I/O, Tornado can scale to tens of thousands of open connections, making it ideal for long polling, WebSockets, and other applications that require a long-lived connection to each user.
-
-** I got an error like, 'No module named requests' What should I do now?
-You can install python modules either downloading tar and extracting it (or) by using pip, by running the command,
-#+begin_example
-pip install requests
-#+end_example
-
-
-** What is requests module in Python?
-Requests is an Apache2 Licensed HTTP library, written in Python.
-
-** How do I install pip in centos?
-We can install pip using package manager or by downloading get-pip.py and running it.
-Using Package manager :
-#+begin_example 
-sudo yum install python-pip
 #+end_example
