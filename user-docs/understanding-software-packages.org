@@ -1,4 +1,4 @@
-#+Title:  Understanding Dependency Scripts
+#+Title:  Understanding Software Packages
 #+Author: Sripathi Kammari
 #+Date:   [2014-09-26 Tue]
 #+SETUPFILE: ./org-templates/level-0.org
