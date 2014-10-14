@@ -6,7 +6,7 @@
 * FAQ-Basic Shell Commands
 
 
-** There is Permission Denied Error. What do we resolve it?
+** There is Permission Denied Error. How do we resolve it?
 This error is encountered if one does not have admin privileges. To do so, run the command by prefixing a 
 #+begin_example
 sudo
@@ -16,6 +16,12 @@ For example,
 #+begin_example
 sudo yum install pip
 #+end_example
+
+or issue a
+#+begin_example
+sudo su -
+#+end_example
+and become a super user.
 
 ** How to give read-write-execute permissions to a file?
 The permissions can be given by the following command:
