@@ -17,11 +17,11 @@ In case you do not have CentOS 6.5 or a higher version, you can install the same
 [[http://www.centos.org/download/][Download CentOS]] 
 
 * Assumptions about Users
-For setting up OVPL on CentOS, you are expected to know how to execute basic shell commands in CentOS 6.5, create and delete a container in OpenVZ virtual environment, create or modify an HTML page and write a code in JavaScript. Here is a quick review material for HTML and JavaScript tutorials. [[http://www.w3schools.com/html/][HTML]] and [[http://www.w3schools.com/js/][JavaScript]] 
+For setting up OVPL on CentOS, you are expected to know how to execute basic shell commands in CentOS 6.5, create and delete a container in OpenVZ virtual environment, create or modify an HTML page and write a code in JavaScript. Here is a quick review material for [[http://www.w3schools.com/html/][HTML]] and [[http://www.w3schools.com/js/][JavaScript]] tutorials.
 
-As an integration engineer, you are expected to know how to use GitHub - a subversioning tool. Here is a small tutorial to revise your concepts about GitHub. [[https://github.com/vlead/setup-ovpl-centos/blob/master/user-docs/version-control.org][Version Control Basics and GitHub]]
+As an integration engineer, you are expected to know how to use GitHub - a version control tool. Here is a small tutorial to revise your concepts about [[https://github.com/vlead/setup-ovpl-centos/blob/master/user-docs/version-control.org][Version Control Basics and GitHub]].
 
-A quick introduction and review of virtualization using openVZ can be found at  [[./intro-to-openvz.org][Introduction to OpenVZ]]
+To create and delete a container in OpenVZ, you need to be familiar with the concepts of virtualization. Here is a quick [[./intro-to-openvz.org][Introduction to OpenVZ]].
 
 * User Documentation - What to find Where? 
 After browsing through the "user-docs", you will find documentation about the following:
