@@ -19,7 +19,7 @@ The script (dependencies.sh) installs the following packages:
 
 - Python & development tools ::
 
-    + MongoDB  :: Database for storing information.
+    + MongoDB  :: MongoDB is a document database that provides high performance, high availability, and easy scalability.
 
     + Pymongo  :: Driver for torando to connect MongoDB
 
@@ -29,5 +29,4 @@ The script (dependencies.sh) installs the following packages:
     + Netaddr :: It is a Python library for representing and
                   manipulating network addresses.
 
-    + Backports :: Which authenticates the hostname you are trying to
-                   connect.
+    + Backports :: It authenticates the hostname to which it tries to connect.
