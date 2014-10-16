@@ -73,7 +73,8 @@ cd lik-release-0.5.0/ovpl-kit/scripts
 #+END_EXAMPLE
 
 ** Edit the configurations
-*** Edit =config.sh=
+   
+   Edit file =config.sh=.
 
 #+BEGIN_EXAMPLE
 cd scripts
@@ -83,7 +84,7 @@ vim config.sh
 
 Edit the config file to set the =http_proxy= and =https_proxy= fields.
 If there are no proxies to be set, leave the fields unchanged.
-Below snippet shows how to set proxies.
+The snippet below shows how to set proxies.
 #+BEGIN_EXAMPLE
 export http_proxy="http://proxy.vlabs.ac.in:8080"
 export https_proxy="http://proxy.vlabs.ac.in:8080"
@@ -109,15 +110,18 @@ cd ../ovpl/src/
 sudo root make
 #+END_EXAMPLE
 
-* Testing your installation
+* Deploy a Lab
 
 At this point, OVPL services are running and you are ready to deploy a lab.
-To deploy your lab:
-- Open the browser.
-- Enter =localhost:8080= as the url.
-- The form requires you to fill =Lab ID=. You may assign any new alphanumeric name as a lab id.
-- Also, fill in the =Repo url= with value of the github repository url.
-- Click =submit= to conclude testing your setup.
+
+- To deploy your lab ::
+     - Open the browser.
+     - Enter =localhost:8080= as the url.
+     - The form requires you to fill =Lab ID=. You may assign any new alphanumeric name as a lab id.
+     - Also, fill in the =Repo url= with the url of the lab sources on github repository.
+     - Click =submit= to deploy your lab.
+     - If the deployment is successful, an =IP address= will appear in the same browser window.
+     - Enter the =IP address= in the address bar to view the newly deployed lab.
 
 
 
