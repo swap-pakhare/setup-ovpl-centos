@@ -11,6 +11,7 @@ publish: init
 	mv ${DEST}*.html ${DEST}${USER-DOCS}
 	mv ${DEST}org-templates ${DEST}${USER-DOCS}
 	mv ${DEST}style ${DEST}${USER-DOCS}
+	mv ${DEST}img ${DEST}${USER-DOCS}
 	rsync -raz --progress ./scripts ${DEST}
 	rsync -raz --progress ./meta ${DEST}
 

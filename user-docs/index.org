@@ -1,33 +1,35 @@
-#+title:  User Documentation for Setting-up OVPL on CentOS
-#+SETUPFILE: ./org-templates/level-0.org
+#+title: User Documentation For Creating An Auto Deployment Platform on CentOS
+#+SETUPFILE:./org-templates/level-0.org 
+#+STARTUP: indent
 
 * Introduction
 
-Welcome to the user documentation for CentOS Virtual Labs platform installation and configuration. As an integration engineer, this documentation will guide you through the steps to set up OVPL on CentOS.
+Welcome to the user documentation to install and configure a machine
+with CentOS for auto deployment of labs.
+
+As an integration engineer, the documentation will guide you through
+the steps to create an auto deployment platform on your CentOS
+machine and deploy a lab.
+
+* Steps Involved in Deploying a Lab
+
+#+CAPTION: Steps for Lab Deployment 
+#+NAME: fig:1
+[[./img/overall_process.png]]
 
 * Pre-requisites for Setting-up OVPL on CentOS
 
-You need to adhere to the following hardware and software requirements for setting up OVPL:
+You need to adhere to the following hardware and software requirements
+for setting up OVPL:
 
-- Minimum 2GB RAM
+- Minimum 2GB RAM 
 - A dedicated partition for CentOS (version 6.5 only)
-- Minimum 50GB hard disk space
+- Minimum 50GB hard disk space 
 - A dual core processor
-In case you do not have CentOS 6.5 or a higher version, you can install the same through the following link:
-[[http://www.centos.org/download/][Download CentOS]] 
+ In case, you do not have CentOS 6.5 or a higher version, you can install the
+  same through the following link: [[http://www.centos.org/download/][/Download CentOS/]]
 
-* Assumptions about Users
-For setting up OVPL on CentOS, you are expected to know how to execute basic shell commands in CentOS 6.5, create and delete a container in OpenVZ virtual environment, create or modify an HTML page and write a code in JavaScript. Here is a quick review material for [[http://www.w3schools.com/html/][HTML]] and [[http://www.w3schools.com/js/][JavaScript]] tutorials.
+* Setting up CentOS as a Lab Deployment Platform & Deploying a Lab
 
-As an integration engineer, you are expected to know how to use GitHub - a version control tool. Here is a small tutorial to revise your concepts about [[https://github.com/vlead/setup-ovpl-centos/blob/master/user-docs/version-control.org][Version Control Basics and GitHub]].
-
-To create and delete a container in OpenVZ, you need to be familiar with the concepts of virtualization. Here is a quick [[./intro-to-openvz.org][Introduction to OpenVZ]].
-
-A set of frequently asked questions of basic shell commands can be found [[https://github.com/vlead/setup-ovpl-centos/blob/master/user-docs/faq.org][Here]].
-
-* User Documentation - What to find Where? 
-After browsing through the "user-docs", you will find documentation about the following:
-
-- [[./setup-centos.org][How to Set Up CentOS as a Virtual Lab Deployment Platform]]  ::
-    This contains instructions about setting CentOS machine as a virtual
-    lab deployment platform.
+Follow these [[./setup-centos.org][/instructions/]] to set up your machine running CentOS as a lab deployment platform.
+    

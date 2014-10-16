@@ -1,4 +1,4 @@
-#+title:  How to Setup CentOS as a Virtual Lab deployment platform
+#+title:  How to Setup CentOS as a Deployment Platform and How to Deploy a Lab
 #+Author: Thirumal Ravula and Venkatesh Choppella
 #+Date:   [2014-10-01 Wed]
 
@@ -52,25 +52,24 @@ sse4_2 popcnt lahf_lm arat dtherm tpr_shadow vnmi flexpriority ept
 vpid
 #+END_EXAMPLE
 
-** You are on the internet
+** You are on the Internet
 
 The installation pulls packages from open repositories and you will need
-an internet connection to run the scripts successfully. 
+an Internet connection to run the scripts successfully. 
 
-** You have root sudo permissions as root
-The scripts run with root permissions and you are expected to invoke
-the script with a =sudo= command.  Be careful!  Reckless execution of
-commands with root permission could make your machine inoperable!.
+** You have sudo permissions as root
+The scripts install software using yum - a package management
+utility - which can run only in sudo root mode.  Therefore, invoke the
+script with a =sudo= command.  Be careful!  Reckless execution of
+commands with root permission could make your machine inoperable!
 
 * Instructions for installation
-** Clone the repository
+** Changing to the right directory
 
-Clone the =setup-ovpl-centos= repository in an appropriate directory
-if you already have not:
+Please use the structure of the LIK, and change directory to =lik-release-0.5.0/ovpl-kit/scripts= 
 
 #+BEGIN_EXAMPLE
-git clone https://github.com/vlead/setup-ovpl-centos.git
-cd setup-ovpl-centos
+cd lik-release-0.5.0/ovpl-kit/scripts
 #+END_EXAMPLE
 
 ** Edit the configurations
@@ -81,8 +80,14 @@ cd scripts
 vim config.sh
 #+END_EXAMPLE
 
+
 Edit the config file to set the =http_proxy= and =https_proxy= fields.
-If there is no proxies to be set, leave the fields unchanged.
+If there are no proxies to be set, leave the fields unchanged.
+Below snippet shows how to set proxies.
+#+BEGIN_EXAMPLE
+export http_proxy="http://proxy.vlabs.ac.in:8080"
+export https_proxy="http://proxy.vlabs.ac.in:8080"
+#+END_EXAMPLE
 
 ** Get the =openVZ= template
 
@@ -98,13 +103,23 @@ cd ../scripts
 sudo root  ./centos_prepare_ovpl.sh
 #+END_EXAMPLE
 
-** Run make to start OVPL
+** Run =make= to start OVPL
 #+BEGIN_EXAMPLE
 cd ../ovpl/src/
 sudo root make
 #+END_EXAMPLE
 
 * Testing your installation
+
+At this point, OVPL services are running and you are ready to deploy a lab.
+To deploy your lab:
+- Open the browser.
+- Enter =localhost:8080= as the url.
+- The form requires you to fill =Lab ID=. You may assign any new alphanumeric name as a lab id.
+- Also, fill in the =Repo url= with value of the github repository url.
+- Click =submit= to conclude testing your setup.
+
+
 
 
 
