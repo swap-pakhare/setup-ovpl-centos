@@ -3,6 +3,11 @@
 
 meta_dir="../meta"
 vz_template_file="ubuntu-12.04-custom-x86_64.tar.gz"
+cd $meta_dir
+echo "==============="
+echo "Downloading $vz_template_file file $meta_dir directory"
+echo "==============="
+wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-x86_64.tar.gz
 
 
 echo ""
