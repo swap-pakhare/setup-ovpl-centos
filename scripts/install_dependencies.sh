@@ -13,6 +13,7 @@ yum -y install gcc python-devel.x86_64 python-pip git
 echo "====== Installing python-setuptools using yum -y install python-setuptools ======"
 yum -y install python-setuptools
 cd /root
+echo "======== Cloning OVPL source code ========="
 git clone https://github.com/vlead/ovpl.git
 cd ovpl
 echo "===== Changed to ovpl directory ======="
