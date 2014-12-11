@@ -9,7 +9,6 @@ rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt
 mv /etc/yum.repos.d/rpmforge.repo /etc/yum.repos.d/rpmforge.repo_disabled
 cp -f $meta_dir/rpmforge.repo.rpmsave /etc/yum.repos.d/rpmforge.repo
 
-
 echo ""
 echo "Upgrade GIT"
 yum update -y git

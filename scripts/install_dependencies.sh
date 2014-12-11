@@ -8,10 +8,17 @@ echo "Setting up EPEL repo.."
 rpm -ivh $meta_dir/epel-release-6-8.noarch.rpm
 #rm epel-release-6.8.noarch.rpm
 echo ""
+
 echo "Installing dependencies.. yum -y install gcc python-devel.x86_64 python-pip ssh git"
 yum -y install gcc python-devel.x86_64 python-pip git
+
+echo "Updating git to newer version... "
+./update_git.sh
+
 echo "====== Installing python-setuptools using yum -y install python-setuptools ======"
 yum -y install python-setuptools
+
+
 cd /root
 echo "======== Cloning OVPL source code ========="
 git clone https://github.com/vlead/ovpl.git
