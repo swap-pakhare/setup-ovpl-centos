@@ -29,6 +29,18 @@ if [[ -n $https_proxy ]]; then
   export https_proxy=$https_proxy
 fi
 
+yum update -y
+yum install -y vim rsync
+
+echo "Install GIT"
+./install_git.sh
+if [$? -ne 0 ]; then
+  echo ""
+  echo "Error installing GIT. Quitting!"
+  exit 1
+fi
+
+export PATH="$PATH:/usr/local/git/bin"
 echo "Invoking install_dependencies.sh"
 ./install_dependencies.sh
 if [ $? -ne 0 ]; then

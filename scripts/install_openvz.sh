@@ -1,15 +1,29 @@
 #!/bin/bash
 # Script to setup OpenVZ repo, install and configure OpenVZ
 
+scripts_dir="../scripts"
 meta_dir="../meta"
 vz_template_file="ubuntu-12.04-custom-x86_64.tar.gz"
+
 cd $meta_dir
 echo "==============="
 echo "Downloading $vz_template_file file to $meta_dir directory"
 echo "==============="
+unset http_proxy
+unset https_proxy
 wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-x86_64.tar.gz
 
+cd $scripts_dir
+source ./config.sh
+if [[ -n $http_proxy ]]; then
+  echo $http_proxy
+  export http_proxy=$http_proxy
+fi
+if [[ -n $https_proxy ]]; then
+  export https_proxy=$https_proxy
+fi
 
+cd $meta_dir
 echo ""
 echo "Setting up OpenVZ repo.."
 #wget -P /etc/yum.repos.d/ http://ftp.openvz.org/openvz.repo
@@ -48,15 +62,19 @@ sed -i 's/#NEIGHBOUR_DEVS=all/NEIGHBOUR_DEVS=all/g' /etc/vz/vz.conf
 sed -i 's/#NEIGHBOUR_DEVS=detect/NEIGHBOUR_DEVS=all/g' /etc/vz/vz.conf
 #
 echo "Setting container layout to default to ploop (VM in a file).."
-sed -i 's/VE_LAYOUT=simfs/VE_LAYOUT=ploop/g' /etc/vz/vz.conf
+sed -i 's/VE_LAYOUT=ploop/VE_LAYOUT=simfs/g' /etc/vz/vz.conf
 #
 echo "Setting Ubuntu 12.04 64bit to be the default template.."
 sed -i 's/centos-6-x86/ubuntu-12.04-x86_64/g' /etc/vz/vz.conf
+
+#set nf_conntrack ip_conntrack_disable_ve0 to 0
+sed -i 's/=1/=0/g' /etc/modprobe.d/openvz.conf
 #
 #sysctl -p
 #
-#echo "Disabling iptables.."
-#/etc/init.d/iptables stop && chkconfig iptables off
+#Setting the IP table rules
+cp $meta_dir/iptables-save /etc/sysconfig/iptables
+#service iptables restart
 
 echo ""
 echo "Finished installing OpenVZ"
