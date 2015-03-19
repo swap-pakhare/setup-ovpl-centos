@@ -6,10 +6,16 @@
 #+options: ^:nil
 
 * Introduction
-TODO 
+This documents describes the implemetation of Auto Deployment Service
+(ADS) using ansible software.
+
+
+
+
 
 * Implementation
-
+** Structure of the scripts
+Scripts are organized as follows:
 
 #+BEGIN_EXAMPLE
     |-- ansible_ads
@@ -24,20 +30,22 @@ TODO
     |   |   `-- setup_ads.yml
 #+END_EXAMPLE
 
-
+** Get the sources
+This command downloads the sources from github and extracts it.
 #+BEGIN_SRC shell :tangle roles/ansible_ads/files/clone_ads.sh
 #!/bin/bash
 wget https://github.com/vlead/setup-ovpl-centos/archive/master.zip
 unzip master.zip
 #+END_SRC 
 
+** Run the shell script to clone ADS
 #+BEGIN_SRC yaml :tangle roles/ansible_ads/tasks/setup_ads.yml
 ---
   - name: run the shell script to clone ads
     script: clone_ads.sh
     environment: proxy_env
 #+END_SRC 
-       
+
 #+BEGIN_SRC yaml :tangle roles/ansible_ads/meta/main.yml
 ---
 dependencies:
