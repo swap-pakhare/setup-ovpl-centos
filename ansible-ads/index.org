@@ -5,11 +5,12 @@
 #+SETUPFILE: org-templates/level-0.org
 
 * Introduction
-This document describes the procedure to setup of Automatic Deployment Service(ADS) on base machine.
-* Steps
+This document describes the procedure to setup of Auto Deployment Service(ADS) on base machine.
+* Steps to congigure container on base machine
 Follow the steps to setup Auto Deployment Service using Ansible
 
-** Create a container on base machine with the following configuration:
+** Configuration of a container on base machine 
+Create container with the following configuration:
 #+BEGIN_EXAMPLE
 Operating System: Centos6.6
 Architecture: 64-bit, x86
@@ -17,25 +18,28 @@ Memory: 256MB
 Disk space: 2GB
 #+END_EXAMPLE
 
-** Create container using:
+** Creation of container
+Create container using following commands:
 #+BEGIN_EXAMPLE
 vzctl create <ctid> --ostemplate centos-6-x86_64 --hostname <hostname> --ipadd <ip address>
 vzctl start <ctid>
 vzctl set <ctid> --nameserver inherit --ram 256M --swap 512M --onboot yes --save
 #+END_EXAMPLE
 
-** Install ansible on this container using:
+** Installation of ansible on the container 
+Use the following commands to install ansible on the container:
 #+BEGIN_EXAMPLE
 rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 yum install ansible -y
 #+END_EXAMPLE
-** Setup proxy using:
+** Setup proxy on container 
 #+BEGIN_EXAMPLE
 export https_proxy="https://proxy.iiit.ac.in:8080"
 export http_proxy="http://proxy.iiit.ac.in:8080"
 #+END_EXAMPLE
 Note: In case of No proxy no need to do this step.
-** Install emacs -=24.4.1=- version using:
+** Install emacs - =24.4.1= - version on container 
+Install emacs =24.4.1= using following commands: 
 #+BEGIN_EXAMPLE
 cd /etc/yum.repos.d
 wget http://pj.freefaculty.org/EL/pjku.repo
