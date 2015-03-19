@@ -1,0 +1,58 @@
+#+TITLE:  Ansible-ADS
+#+PROPERTY: session *scratch*
+#+PROPERTY: results output
+#+PROPERTY: exports code
+#+SETUPFILE: org-templates/level-0.org
+#+options: ^:nil
+
+* Introduction
+TODO 
+
+* Implementation
+
+
+#+BEGIN_EXAMPLE
+    |-- ansible_ads
+    |   |-- files
+    |   |    `-- clone_ads.sh
+    |   |-- handlers
+    |   |    `-- main.yml
+    |   |-- meta
+    |   |   `-- main.yml
+    |   |-- tasks
+    |   |   |-- main.yml
+    |   |   `-- setup_ads.yml
+#+END_EXAMPLE
+
+
+#+BEGIN_SRC shell :tangle roles/ansible_ads/files/clone_ads.sh
+#!/bin/bash
+wget https://github.com/vlead/setup-ovpl-centos/archive/master.zip
+unzip master.zip
+#+END_SRC 
+
+#+BEGIN_SRC yaml :tangle roles/ansible_ads/tasks/setup_ads.yml
+---
+  - name: run the shell script to clone ads
+    script: clone_ads.sh
+    environment: proxy_env
+#+END_SRC 
+       
+#+BEGIN_SRC yaml :tangle roles/ansible_ads/meta/main.yml
+---
+dependencies:
+  - role: common_vars
+#+END_SRC
+
+
+#+BEGIN_SRC yaml :tangle roles/ansible_ads/handlers/main.yml
+---
+#Empty
+#+END_SRC
+
+#+BEGIN_SRC yaml :tangle roles/ansible_ads/tasks/main.yml
+---
+ - name: cloning ads
+   include: setup_ads.yml
+#+END_SRC
+

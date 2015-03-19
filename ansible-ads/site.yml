@@ -1,0 +1,7 @@
+
+---
+  - name: Setup ADS server
+    hosts: ads_server
+    roles:
+      - common_vars
+      - ansible_ads

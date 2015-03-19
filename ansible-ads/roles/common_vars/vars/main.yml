@@ -1,0 +1,5 @@
+
+---
+  proxy_env:
+    http_proxy: http://proxy.virtual-labs.ac.in:8080/
+    https_proxy: http://proxy.virtual-labs.ac.in:8080/

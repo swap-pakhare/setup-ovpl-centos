@@ -1,0 +1,5 @@
+
+---
+  - name: run the shell script to clone ads
+    script: setup_ads.yml
+    environment: proxy_env
