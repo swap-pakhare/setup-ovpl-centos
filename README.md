@@ -54,7 +54,7 @@ Steps to run the scripts
         cd ../../centos/
         vagrant up
         ```
-        
+  
 8. SSH into running Vagrant machine.
         ```
         vagrant ssh
@@ -64,13 +64,12 @@ Steps to run the scripts
        ```
        scp -p -r 2222 setup-ovpl-centos/scripts vagrant@<your_ip>:
        ```
-       
-10. Run the ```centos_prepare_ovpl.sh``` script from *vagrant vm* as a root user. 
-        ```       
-        sh  centos_prepare_ovpl.sh
-        ```
-    This sets up OVPL and all its dependencies successfully.
 
-11. 
+10. Run the ```centos_prepare_ovpl.sh``` script from *vagrant vm* as a root user. This sets up OVPL and all its dependencies successfully.
+       ```       
+       sh  centos_prepare_ovpl.sh
+       ```
+
+11.  
 
 
