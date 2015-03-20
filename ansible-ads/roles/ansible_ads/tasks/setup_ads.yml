@@ -1,3 +1,3 @@
 ---
-  - name: run the shell script to clone ads
-    script: clone_ads.sh
+  - name: run the shell script to setup ads
+    script: setup_ads.sh

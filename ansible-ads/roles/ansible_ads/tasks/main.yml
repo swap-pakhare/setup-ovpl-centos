@@ -1,3 +1,6 @@
 ---
-  - name: setting up the ads
+  - name: downloading the ads setup files
+    include: download_ads.yml
+
+  - name: setting up ads
     include: setup_ads.yml
