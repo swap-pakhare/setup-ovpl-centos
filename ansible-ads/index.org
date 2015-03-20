@@ -1,11 +1,12 @@
-#+title: Ansibilized ADS Service
+#+TITLE: Ansibilized ADS Service
 #+PROPERTY: session *scratch*
 #+PROPERTY: results output
 #+PROPERTY: exports code
 #+SETUPFILE: org-templates/level-0.org
 
 * Introduction
-This document describes the procedure to setup of Auto Deployment Service(ADS) on base machine.
+This document describes the procedure to setup of Auto Deployment
+Service(ADS) on base machine.
 * Steps to congigure container on base machine
 Follow the steps to setup Auto Deployment Service using Ansible
 
@@ -32,21 +33,14 @@ Use the following commands to install ansible on the container:
 rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 yum install ansible -y
 #+END_EXAMPLE
+
 ** Setup proxy on container 
 #+BEGIN_EXAMPLE
 export https_proxy="https://proxy.iiit.ac.in:8080"
 export http_proxy="http://proxy.iiit.ac.in:8080"
 #+END_EXAMPLE
 Note: In case of No proxy no need to do this step.
-** Install emacs - =24.4.1= - version on container 
-Install emacs =24.4.1= using following commands: 
-#+BEGIN_EXAMPLE
-cd /etc/yum.repos.d
-wget http://pj.freefaculty.org/EL/pjku.repo
-rpm --import http://pj.freefaculty.org/EL/PaulJohnson-BinaryPackageSigningKey
-sudo yum install emacs-24.2-4.el6.x86_64
-#+END_EXAMPLE
- 
+
 * Nodes
 This cluster contains the following machine:
 #+BEGIN_SRC yaml :tangle hosts :eval no

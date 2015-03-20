@@ -1,0 +1,72 @@
+#+TITLE:  Ansible Playbook Structure
+#+PROPERTY: session *scratch*
+#+PROPERTY: results output
+#+PROPERTY: exports code
+#+options: ^:nil
+
+* Introduction 
+Playbooks are Ansible configuration, deployment, and orchestration
+language. 
+You can find more information about playbook [[http://docs.ansible.com/playbooks_intro.html][HERE]].
+
+* Structure
+General structure of Ansible Playbook would contain files and
+directories. This hierarchy represents a "role" as follows:
+
+#+BEGIN_EXAMPLE
+roles/
+`-- common
+    |-- defaults
+    |   `-- main.yml
+    |-- files
+    |   |-- bar.txt
+    |   `-- main.yml
+    |-- handlers
+    |   `-- main.yml
+    |-- meta
+    |   `-- main.yml
+    |-- tasks
+    |   `-- main.yml
+    |-- templates
+    |   `-- ntp.conf.j2
+    `-- vars
+        `-- main.yml
+  
+#+END_EXAMPLE
+
+** Roles
+Roles are ways of automatically loading certain =vars_files=, =tasks=, and
+=handlers= based on a known file structure. Grouping content by roles
+also allows easy sharing of roles with other users.
+You can find more information about roles [[http://docs.ansible.com/playbooks_roles.html#roles][HERE]].
+
+** File 
+File contains the different =files= and list of =tasks= to be
+done. 
+
+** Handlers
+Handlers are lists of =tasks=, not really any different from regular
+tasks, that are referenced by name. Handlers are what notifiers
+notify. If nothing notifies a handler, it will not run.
+
+** Meta 
+All dependencies of =role= goes here. 
+
+** Tasks
+=Tasks= file can also include smaller =files= which further contains a flat list of tasks.
+Each play contains a list of tasks. Tasks are executed in order, one
+at a time, against all machines matched by the host pattern, before
+moving on to the next task.
+The goal of each task is to execute a module, with very specific
+arguments. 
+
+** Template
+Files for use with the template resource. You can find more
+information about templates [[http://docs.ansible.com/template_module.html][HERE]]
+
+** Vars 
+All the explicitly passed-in parameters or variables
+associated with this role goes here.
+
+** Defaults
+Default lower priority variables for this role goes here.

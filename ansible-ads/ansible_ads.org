@@ -6,13 +6,13 @@
 
 * Introduction 
 The infrastructure where labs are hosted is secured by enabling
-various services through ansible playbook. Once the network is up, the
+various services through [[./playbook-structure.org][ansible playbook]]. Once the network is up, the
 next task is to deploy the labs. Auto Deployment Service(ADS) is a
 service used by a lab integrator to deploy and test the lab. This
-document presents the procedure on how the ADS service was ansiblised.
+document presents the procedure on how the ADS service is ansiblised.
 
 * Requirement
-The requirement is to create ansible-playbook which will install ADS
+The requirement is to create ansible-playbook which installs ADS
 service on a centos machine. 
 
 * Design
@@ -62,7 +62,7 @@ dependencies:
 #+END_SRC
 
 ** Collating the Tasks
-all the tasks are collated and included through the main file.
+All the tasks are collated and included through the main file.
 #+BEGIN_SRC yaml :tangle roles/ansible_ads/tasks/main.yml
 ---
  - name: cloning ads
