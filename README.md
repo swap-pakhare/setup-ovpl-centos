@@ -45,6 +45,8 @@ Steps to run the scripts
 6. Run the ```scripts/install_vagrant.sh``` script
         ```
         cd scripts
+        ```
+        ```
         sh install_vagrant.sh
         ```
 
@@ -52,6 +54,8 @@ Steps to run the scripts
    To configure virtual machine according to this Vagrantfile,  enter into the folder and do ```vagrant up```
         ```
         cd ../../centos/
+        ```
+        ```
         vagrant up
         ```
   
