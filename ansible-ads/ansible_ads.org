@@ -1,18 +1,27 @@
-#+TITLE:  CentosVZAdapter
+#+TITLE:  Ansible-ADS
 #+PROPERTY: session *scratch*
 #+PROPERTY: results output
 #+PROPERTY: exports code
-#+SETUPFILE: org-templates/level-0.org
 #+options: ^:nil
 
-* Introduction
-This documents describes the implemetation of Auto Deployment Service
-(ADS) using ansible software. Ansible playbook brings up the
-CentosVZAdapter to run the Autodeployment services.
+* Introduction 
+The infrastructure where labs are hosted is secured by enabling
+various services through ansible playbook. Once the network is up, the
+next task is to deploy the labs. Auto Deployment Service(ADS) is a
+service used by a lab integrator to deploy and test the lab. This
+document presents the procedure on how the ADS service was ansiblised.
+
+* Requirement
+The requirement is to create ansible-playbook which will install ADS
+service on a centos machine. 
+
+* Design
+TODO
 
 * Implementation
-** Structure of the scripts
-Scripts are organized as follows:
+The implementation of this system is in terms of a collection of
+ansible scripts that configure the machine.  These scripts are
+organized in the following way:
 #+BEGIN_EXAMPLE
     |-- ansible_ads
     |   |-- files
@@ -26,34 +35,34 @@ Scripts are organized as follows:
     |   |   `-- setup_ads.yml
 #+END_EXAMPLE
 
-** Get the sources
-This command downloads the sources from github and extracts it.
+** Downloading the Setup
+ADS setup is downloaded on the target machine from the github
+repository. The repository can be found at: [[https://github.com/vlead/setup-ovpl-centos][Setting up ADS]].  The
+repository is unziped and =makefile= is run to obtain the source code. 
 #+BEGIN_SRC shell :tangle roles/ansible_ads/files/clone_ads.sh
 #!/bin/bash
 wget https://github.com/vlead/setup-ovpl-centos/archive/master.zip
 unzip master.zip
 #+END_SRC 
 
-** Run the shell script to clone ADS
+This download procedure is invoked using a yaml script.
 #+BEGIN_SRC yaml :tangle roles/ansible_ads/tasks/setup_ads.yml
 ---
   - name: run the shell script to clone ads
     script: clone_ads.sh
-    environment: proxy_env
 #+END_SRC 
-
+       
+** Common Dependencies
+All the common dependencies like proxy environment, server ips are
+used from the =common_vars=.
 #+BEGIN_SRC yaml :tangle roles/ansible_ads/meta/main.yml
 ---
 dependencies:
   - role: common_vars
 #+END_SRC
 
-
-#+BEGIN_SRC yaml :tangle roles/ansible_ads/handlers/main.yml
----
-#Empty
-#+END_SRC
-
+** Collating the Tasks
+all the tasks are collated and included through the main file.
 #+BEGIN_SRC yaml :tangle roles/ansible_ads/tasks/main.yml
 ---
  - name: cloning ads
