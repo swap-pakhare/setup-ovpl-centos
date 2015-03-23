@@ -17,9 +17,13 @@ the roles, services, and various adapters of the ADS.
 This Network diagram represents the structure of ADS in the Base-1 Cluster.
 The prerequisite for the ADS is to ensure that all other nodes in the Network are setup.
 * ADS as plug and play
-
 ** Role of ADS
 ** ADS and Adapters
+Types of Adapters are as follows:
+- CentOSVZAdapter: A module for managing VMs on CentOS OpenVZ platform.
+- AWSAdapter : A module for managing VMs on Amazon.
+- DummyAdapter: A module which is a mock adapter. It pretends to setup VM's and the like but actually does nothing.
+In the current release, CentOSVZAdapter is used for setting of ADS for base-1 cluster.
 ** RELEASE Description
 
 * Steps to configure container on base machine
