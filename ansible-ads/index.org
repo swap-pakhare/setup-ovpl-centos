@@ -18,6 +18,20 @@ This Network diagram represents the structure of ADS in the Base-1 Cluster.
 The prerequisite for the ADS is to ensure that all other nodes in the Network are setup.
 * ADS as plug and play
 ** Role of ADS
+Auto Deployment Service(ADS) is a service used by a lab integrator to
+deploy and test the lab. This document presents the procedure on how
+the ADS service is ansiblised.
+
+The infrastructure where labs are hosted is secured by enabling
+various services through [[./playbook-structure.org][ansible playbook]]. Once the network is up, the
+next task is to deploy the labs.
+
+#+CAPTION:  Steps Involved in Deploying a Lab
+#+LABEL:  Steps Involved in Deploying a Lab
+#+NAME:  Steps Involved in Deploying a Lab
+[[./images/overall_process.png]]
+
+
 ** ADS and Adapters
 Types of Adapters are as follows:
 - CentOSVZAdapter: A module for managing VMs on CentOS OpenVZ platform.
