@@ -5,13 +5,19 @@
 #+SETUPFILE: org-templates/level-0.org
 
 * Introduction
-This document describes the procedure to setup of Auto Deployment
-Service(ADS) on base machine which is the part of base-1 cluster.
+Auto Deployment Service(ADS) is one of the Node in base-1 cluster, which is responsible for deploying and testing the labs.
+The detail description of each Node in the cluster can be referenced in the base-1 cluster document. This document describes
+the roles, services, and various adapters of the ADS.
 * Design
 ** Architecture of Network
-[[./images/spec-base1-cluster.png]]
-
+#+CAPTION:  Network Diagram
+#+LABEL:  fig-network-diagram
+#+NAME: fig-network-diagram
+ [[./images/spec-base1-cluster.png]]
+This Network diagram represents the structure of ADS in the Base-1 Cluster.
+The prerequisite for the ADS is to ensure that all other nodes in the Network are setup.
 * ADS as plug and play
+
 ** Role of ADS
 ** ADS and Adapters
 ** RELEASE Description
