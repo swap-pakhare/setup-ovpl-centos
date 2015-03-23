@@ -4,19 +4,16 @@
 #+PROPERTY: exports code
 #+options: ^:nil
 
-* Introduction 
+* Introduction
 The infrastructure where labs are hosted is secured by enabling
-various services through [[./playbook-structure.org][ansible playbook]]. Once the network is up, the
+various services through ansible playbook. Once the network is up, the
 next task is to deploy the labs. Auto Deployment Service(ADS) is a
 service used by a lab integrator to deploy and test the lab. This
-document presents the procedure on how the ADS service is ansiblised.
+document presents the procedure on how the ADS service was ansiblised.
 
 * Requirement
-The requirement is to create ansible-playbook which installs ADS
-service on a centos machine. 
-
-* Design
-TODO
+The requirement is to create ansible-playbook which will install ADS
+service on a centos machine.
 
 * Implementation
 The implementation of this system is in terms of a collection of
@@ -25,33 +22,58 @@ organized in the following way:
 #+BEGIN_EXAMPLE
     |-- ansible_ads
     |   |-- files
-    |   |    `-- clone_ads.sh
+    |   |   |--  setup_ads.sh
+    |   |    `-- download_ads.sh
     |   |-- handlers
     |   |    `-- main.yml
     |   |-- meta
     |   |   `-- main.yml
     |   |-- tasks
     |   |   |-- main.yml
+    |   |   |-- download_ads.yml
     |   |   `-- setup_ads.yml
 #+END_EXAMPLE
 
-** Downloading the Setup
+** Downloading and Running the Setup
 ADS setup is downloaded on the target machine from the github
 repository. The repository can be found at: [[https://github.com/vlead/setup-ovpl-centos][Setting up ADS]].  The
-repository is unziped and =makefile= is run to obtain the source code. 
-#+BEGIN_SRC shell :tangle roles/ansible_ads/files/clone_ads.sh
+repository is unziped and =makefile= is run to obtain the source code.
+#+BEGIN_SRC shell :tangle roles/ansible_ads/files/download_ads.sh
 #!/bin/bash
+cd /home
+mkdir ads
+cd ads
 wget https://github.com/vlead/setup-ovpl-centos/archive/master.zip
 unzip master.zip
-#+END_SRC 
+cd setup-ovpl-centos-master
+make
+#+END_SRC
 
-This download procedure is invoked using a yaml script.
-#+BEGIN_SRC yaml :tangle roles/ansible_ads/tasks/setup_ads.yml
+To host the labs we need to create containers using a OS template. For
+this we use a customized ubuntu template. The dependencies are then
+installed to run the ADS service. The installation status is copied to
+a =temp= file in the =scripts= directory.
+#+BEGIN_SRC shell :tangle roles/ansible_ads/files/setup_ads.sh
+#!/bin/bash
+cd /home/ads/setup-ovpl-centos-master/build/scripts
+export no_proxy="http://community.virtual-labs.ac.in/downloads/"
+wget -O ../meta/ubuntu-12.04-custom-x86_64.tar.gz community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-x86_64.tar.gz
+sh centos_prepare_ovpl.sh >> temp
+#+END_SRC
+
+The above mentioned process is invoked using yaml scripts.
+#+BEGIN_SRC yaml :tangle roles/ansible_ads/tasks/download_ads.yml
 ---
   - name: run the shell script to clone ads
-    script: clone_ads.sh
-#+END_SRC 
-       
+    script: download_ads.sh
+#+END_SRC
+
+#+BEGIN_SRC yaml :tangle roles/ansible_ads/tasks/setup_ads.yml
+---
+  - name: run the shell script to setup ads
+    script: setup_ads.sh
+#+END_SRC
+      
 ** Common Dependencies
 All the common dependencies like proxy environment, server ips are
 used from the =common_vars=.
@@ -62,10 +84,12 @@ dependencies:
 #+END_SRC
 
 ** Collating the Tasks
-All the tasks are collated and included through the main file.
+all the tasks are collated and included through the main file.
 #+BEGIN_SRC yaml :tangle roles/ansible_ads/tasks/main.yml
 ---
- - name: cloning ads
-   include: setup_ads.yml
-#+END_SRC
+  - name: downloading the ads setup files
+    include: download_ads.yml
 
+  - name: setting up ads
+    include: setup_ads.yml
+#+END_SRC
