@@ -6,7 +6,7 @@
 
 * Introduction
 This document describes the procedure to setup of Auto Deployment
-Service(ADS) on base machine.
+Service(ADS) on base machine which is the part of base-1 cluster.
 * Design
 * Architecture of Network
 [[./images/spec-base1-cluster.png]]
@@ -37,6 +37,13 @@ vzctl start <ctid>
 vzctl set <ctid> --nameserver inherit --ram 256M --swap 512M --onboot yes --save
 #+END_EXAMPLE
 
+** Setup proxy on container 
+#+BEGIN_EXAMPLE
+export https_proxy="https://proxy.iiit.ac.in:8080"
+export http_proxy="http://proxy.iiit.ac.in:8080"
+#+END_EXAMPLE
+Note: In case of No proxy no need to do this step.
+
 ** Installation of ansible on the container 
 Use the following commands to install ansible on the container:
 #+BEGIN_EXAMPLE
@@ -44,12 +51,6 @@ rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noar
 yum install ansible -y
 #+END_EXAMPLE
 
-** Setup proxy on container 
-#+BEGIN_EXAMPLE
-export https_proxy="https://proxy.iiit.ac.in:8080"
-export http_proxy="http://proxy.iiit.ac.in:8080"
-#+END_EXAMPLE
-Note: In case of No proxy no need to do this step.
 
 * Nodes
 This cluster contains the following machine:
