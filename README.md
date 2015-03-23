@@ -42,20 +42,20 @@ Steps to run the scripts
        git checkout vagrant-setup
       ```
 
-6. Run the ```scripts/install_vagrant.sh``` script
+6. Change directory to ```scripts```
         ```
         cd scripts
         ```
+
+7. Run the ```install_vagrant.sh``` script
         ```
-        sh install_vagrant.sh
+        bash install_vagrant.sh
         ```
 
 7. As a result of this script, a folder ```centos``` with ```Vagrantfile``` is created at the home directory. 
    To configure virtual machine according to this Vagrantfile,  enter into the folder and do ```vagrant up```
         ```
         cd ../../centos/
-        ```
-        ```
         vagrant up
         ```
   
@@ -69,11 +69,11 @@ Steps to run the scripts
        scp -p -r 2222 setup-ovpl-centos/scripts vagrant@<your_ip>:
        ```
 
-10. Run the ```centos_prepare_ovpl.sh``` script from *vagrant vm* as a root user. This sets up OVPL and all its dependencies successfully.
+10. Run the ```centos_prepare_ovpl.sh``` script from *vagrant vm* as a root user. This clones OVPL and all its dependencies successfully.
        ```       
-       sh  centos_prepare_ovpl.sh
+       bash centos_prepare_ovpl.sh
        ```
 
-11.  
+11.  To set up OVPL and install all its dependencies, 
 
 
