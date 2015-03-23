@@ -7,10 +7,20 @@
 * Introduction
 This document describes the procedure to setup of Auto Deployment
 Service(ADS) on base machine.
+* Design
+* Architecture of Network
+[[./images/spec-base1-cluster.png]]
+
+* ADS as plug and play
+** Role of ADS
+** ADS and Adapters
+** RELEASE Description
+
 * Steps to configure container on base machine
 Follow the steps to setup Auto Deployment Service using Ansible
 
-** Configuration of a container on base machine 
+** Configuration of a 
+container on base machine 
 Create container with the following configuration:
 #+BEGIN_EXAMPLE
 Operating System: Centos6.6
