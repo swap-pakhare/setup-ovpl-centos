@@ -1,85 +1,50 @@
-#+TITLE: Ansibilized ADS Service
+#+TITLE: Auto Deployment Service  
 #+PROPERTY: session *scratch*
 #+PROPERTY: results output
 #+PROPERTY: exports code
 #+SETUPFILE: org-templates/level-0.org
 
 * Introduction
-Auto Deployment Service(ADS) is one of the Node in base-1 cluster, which is responsible for deploying and testing the labs.
-The detail description of each Node in the cluster can be referenced in the base-1 cluster document. This document describes
-the roles, services, and various adapters of the ADS.
+Auto Deployment Service(ADS) is one of the Node in Base-1 cluster,
+which is responsible for deploying and testing the labs.  The detail
+description of each Node in the cluster can be referenced in the
+Base-1 cluster document. This document describes the roles, services
+and various adapters of the ADS.
+
 * Design
 ** Architecture of Network
+
 #+CAPTION:  Network Diagram
 #+LABEL:  fig-network-diagram
 #+NAME: fig-network-diagram
- [[./images/spec-base1-cluster.png]]
-This Network diagram represents the structure of ADS in the Base-1 Cluster.
-The prerequisite for the ADS is to ensure that all other nodes in the Network are setup.
+ [[./images/spec-base1-cluster.png]] 
+
+This Network diagram represents the structure of ADS in the Base-1
+Cluster.  The prerequisite for the ADS is to ensure that all other
+nodes in the Network are setup.
+
 * ADS as plug and play
+ADS can work independent to deploy and test the labs. It can also
+integrate with Base-1 cluster and Amazon Web Services (AWS). In the
+current release, ADS integrates with Base-1 cluster.
+
 ** Role of ADS
 Auto Deployment Service(ADS) is a service used by a lab integrator to
-deploy and test the lab. This document presents the procedure on how
-the ADS service is ansiblised.
+deploy and test the lab. 
 
-The infrastructure where labs are hosted is secured by enabling
+The infrastructure, where labs are hosted is secured by enabling
 various services through [[./playbook-structure.org][ansible playbook]]. Once the network is up, the
-next task is to deploy the labs.
-
-#+CAPTION:  Steps Involved in Deploying a Lab
-#+LABEL:  Steps Involved in Deploying a Lab
-#+NAME:  Steps Involved in Deploying a Lab
-[[./images/overall_process.png]]
-
+next task is to deploy the labs. 
 
 ** ADS and Adapters
 Types of Adapters are as follows:
-- CentOSVZAdapter: A module for managing VMs on CentOS OpenVZ platform.
-- AWSAdapter : A module for managing VMs on Amazon.
-- DummyAdapter: A module which is a mock adapter. It pretends to setup VM's and the like but actually does nothing.
-In the current release, CentOSVZAdapter is used for setting of ADS for base-1 cluster.
-** RELEASE Description
-
-* Steps to configure container on base machine
-Follow the steps to setup Auto Deployment Service using Ansible
-
-** Configuration of a container 
-container on base machine 
-Create container with the following configuration:
-#+BEGIN_EXAMPLE
-Operating System: Centos6.6
-Architecture: 64-bit, x86
-Memory: 256MB
-Disk space: 2GB
-#+END_EXAMPLE
-
-** Creation of container
-Create container using following commands:
-#+BEGIN_EXAMPLE
-vzctl create <ctid> --ostemplate centos-6-x86_64 --hostname <hostname> --ipadd <ip address>
-vzctl start <ctid>
-vzctl set <ctid> --nameserver inherit --ram 256M --swap 512M --onboot yes --save
-#+END_EXAMPLE
-
-** Setup proxy on container 
-#+BEGIN_EXAMPLE
-export https_proxy="https://proxy.iiit.ac.in:8080"
-export http_proxy="http://proxy.iiit.ac.in:8080"
-#+END_EXAMPLE
-Note: In case of No proxy no need to do this step.
-
-** Installation of ansible on the container 
-Use the following commands to install ansible on the container:
-#+BEGIN_EXAMPLE
-rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
-yum install ansible -y
-#+END_EXAMPLE
+- *CentOSVZAdapter:* A module for managing VMs on CentOS OpenVZ platform.
+- *AWSAdapter:* A module for managing VMs on Amazon.
+- *DummyAdapter:* A module which is a mock adapter. It pretends to setup VM's and the like but actually does nothing.
+In the current release, CentOSVZAdapter is used for setting of ADS for Base-1 cluster.
+** TODO RELEASE Description
 
 
-* Nodes
-This cluster contains the following machine:
-#+BEGIN_SRC yaml :tangle hosts :eval no
-[ads-server]
-10.2.56.230
-#+END_SRC
+
+
 
