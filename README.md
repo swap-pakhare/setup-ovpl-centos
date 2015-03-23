@@ -42,7 +42,7 @@ Steps to run the scripts
        git checkout vagrant-setup
       ```
 
-6. Change directory to ```scripts```
+6. Change directory to ```scripts```  
         ```
         cd scripts
         ```
@@ -74,6 +74,11 @@ Steps to run the scripts
        bash centos_prepare_ovpl.sh
        ```
 
-12. 
+12. To run OVPL, follow the steps below
+       ```       
+       cd /root/
+       cd /ovpl/src/
+       make
+       ```
 
 
