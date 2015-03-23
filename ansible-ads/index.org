@@ -8,7 +8,7 @@
 This document describes the procedure to setup of Auto Deployment
 Service(ADS) on base machine which is the part of base-1 cluster.
 * Design
-* Architecture of Network
+** Architecture of Network
 [[./images/spec-base1-cluster.png]]
 
 * ADS as plug and play
@@ -19,7 +19,7 @@ Service(ADS) on base machine which is the part of base-1 cluster.
 * Steps to configure container on base machine
 Follow the steps to setup Auto Deployment Service using Ansible
 
-** Configuration of a 
+** Configuration of a container 
 container on base machine 
 Create container with the following configuration:
 #+BEGIN_EXAMPLE
