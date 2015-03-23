@@ -7,7 +7,7 @@
 * Introduction
 This document describes the procedure to setup of Auto Deployment
 Service(ADS) on base machine.
-* Steps to congigure container on base machine
+* Steps to configure container on base machine
 Follow the steps to setup Auto Deployment Service using Ansible
 
 ** Configuration of a container on base machine 
