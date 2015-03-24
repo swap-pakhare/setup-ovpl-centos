@@ -66,7 +66,7 @@ Steps to run the scripts
 
 10. From your local machine, copy the ```scripts``` of ```setup-ovpl-centos``` to vagrant vm:
        ```
-       scp -p -r 2222 setup-ovpl-centos/scripts vagrant@<your_ip>:
+       rysnc -a --progress <username>:<ip-address-of your-base-machine>:<path-of-setup-ovpl-cento> /root/
        ```
 
 11. Run the ```centos_prepare_ovpl.sh``` script from *vagrant vm* as a root user. This sets up OVPL and all its dependencies successfully:
