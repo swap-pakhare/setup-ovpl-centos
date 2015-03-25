@@ -56,15 +56,15 @@ Steps to run the scripts
        vagrant up
        ```
   
-  10. Login as root user:
-       ```
-       sudo su
-       ```
-
-  11. SSH into running Vagrant machine:
+  10.  SSH into running Vagrant machine:
         ```
         vagrant ssh
         ```
+
+  11. Login as root user:
+       ```
+       sudo su
+       ```
 
   12. Next step is to copy the ```setup-ovpl-centos``` folder from your local machine to vagrant vm(base machine). To achieve this, do an ```ifconfig``` on your base machine to get its ip-address.
   
