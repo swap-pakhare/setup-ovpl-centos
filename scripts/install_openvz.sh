@@ -5,25 +5,25 @@ scripts_dir="../scripts"
 meta_dir="../meta"
 vz_template_file="ubuntu-12.04-custom-x86_64.tar.gz"
 
-cd $meta_dir
 echo "==============="
 echo "Downloading $vz_template_file file to $meta_dir directory"
 echo "==============="
-unset http_proxy
-unset https_proxy
-wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-x86_64.tar.gz
-
-cd $scripts_dir
-source ./config.sh
-if [[ -n $http_proxy ]]; then
-  echo $http_proxy
-  export http_proxy=$http_proxy
+echo "iiit_lan = $iiit_lan"
+if [ $iiit_lan -eq 1 ]
+then
+    echo "In the IIIT lan, have to unset proxy while downloading from LAN"
+    unset http_proxy
+    unset https_proxy
+    cd $meta_dir
+    wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-x86_64.tar.gz
+    cd $scripts_dir
+    source ./config.sh
+    echo $http_proxy
+else
+    cd $meta_dir
+    wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-x86_64.tar.gz
 fi
-if [[ -n $https_proxy ]]; then
-  export https_proxy=$https_proxy
-fi
 
-cd $meta_dir
 echo ""
 echo "Setting up OpenVZ repo.."
 #wget -P /etc/yum.repos.d/ http://ftp.openvz.org/openvz.repo
