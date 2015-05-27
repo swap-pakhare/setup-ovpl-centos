@@ -1,6 +1,7 @@
 #!/bin/bash
 
-setupDir="/root/setup-ovpl-centos"
+numFields=`pwd | awk -F'/' '{print NF-1}'`
+setupDir=`pwd | cut -d'/' -f1-$numFields`
 
 function echo_status
 {
@@ -12,8 +13,6 @@ function echo_status
     echo "Successfully executed ( "$2" )."
   fi
 }
-
-source ./config.sh
 
 echo $http_proxy
 echo $https_proxy
@@ -44,23 +43,26 @@ wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key a
 #Install Virtual Box 
 echo "#Install Virtual Box "
 sudo apt-get -y update
-command="sudo apt-get install -y virtualbox-4.3"
+command="sudo apt-get install -y --force-yes virtualbox-4.3"
 $command
 echo_status $? "$command"
 rm -rf oracle_vbox.asc
 
 #Install Vagrant
 echo "#Install Vagrant"
-wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.1_x86_64.deb
-command="dpkg -i vagrant_1.7.1_x86_64.deb"
+wget_command="wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb"
+echo "WGET : $wget_command"
+$wget_command
+echo_status $? "$wget_command"
+command="dpkg -i vagrant_1.7.2_x86_64.deb"
 $command
 echo_status $? "$command"
-rm -rf vagrant_1.7.1_x86_64.deb
+rm -rf vagrant_1.7.2_x86_64.deb
 
 cd /root/
 mkdir centos
 cd centos
-vagrant init chef/centos-6.5
 rsync ${setupDir}/meta/Vagrantfile.save Vagrantfile
+vagrant init chef/centos-6.5
 
 exit 0
