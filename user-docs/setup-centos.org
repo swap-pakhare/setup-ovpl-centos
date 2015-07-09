@@ -115,8 +115,8 @@ sudo root  ./centos_prepare_ovpl.sh
 
   
 ** Other Configurations specific to ADS (Auto Deployment Service)
-Edit the file =ovpl/config/config.json= and execute the following steps, to
-configure and then run ADS as a service:
+Edit the file =ovpl/config/config.json= and execute the following steps to
+configure ADS and then run ADS as a service:
 
   + To set the proxies.
 #+begin_src example
@@ -134,34 +134,36 @@ configure and then run ADS as a service:
     },
 #+end_src
 
-  + Set the SERVER_IP in LOGSERVER_CONFIGURATION to the IP address of the
-machine on which the ADS services are running.
+  + Set the SERVER_IP in LOGSERVER_CONFIGURATION to the IP address of
+    the machine on which the ADS services are running.
 #+begin_src example
 "LOGSERVER_CONFIGURATION": {
             "SERVER_IP": "ads-server-private-ip",
 	    },
 #+end_src
 
-  + Set the COOKIE_SECRET value in CONTROLLER_CONFIG to some long randomly
-    generated string.
+  + Set the COOKIE_SECRET value in CONTROLLER_CONFIG to some long
+    randomly generated string.
 
 #+begin_src example
 "COOKIE_SECRET": "<generate a long random UUID>",
 #+end_src
 
-  + Leave the PERSONA_VERIFIER field as it is, if you are using the Mozilla's
-    default Persona provider service.
+  + Leave the PERSONA_VERIFIER field as it is, if you are using the
+    Mozilla's default Persona provider service.
 
-  + Change APP_URL field and put the URL where the application is hosted.
+  + Change APP_URL field and put the URL where the application is
+    hosted.
 #+begin_src example
      "APP_URL": "http://ads-server-public-ip:8080",
 #+end_src
 
-  + Copy =config/sample_authorized_users.py= to =config/authorized_users.py=,
-    and add actual email addresses of authorized users.
+  + Copy =config/sample_authorized_users.py= to
+    =config/authorized_users.py=, and add actual email addresses of
+    authorized users.
 
-** Choose ADAPTER_NAME
-   In the ADAPTER section, change the ADAPTER_NAME to "CentOSVZAdapter".
+  + Choose ADAPTER_NAME in the ADAPTER section, change the
+    ADAPTER_NAME to "CentOSVZAdapter".
 
 #+begin_src example
 "ADAPTER": {
@@ -170,24 +172,23 @@ machine on which the ADS services are running.
 #+end_src
 
 *** Settings for CentOSVZAdapter
-   Edit the file =ovpl/src/adapters/settings.py= to set
-   the following:
+   Edit the file =ovpl/src/adapters/settings.py= to set the following:
 
-   1. If the services are running on the base machine,
-      set ADS_ON_CONTAINER to False.
+   1. If the services are running on the base machine, set
+      ADS_ON_CONTAINER to False.
 
-   2. If the services are running on a container,
-      set ADS_ON_CONTAINER to True.
+   2. If the services are running on a container, set ADS_ON_CONTAINER
+      to True.
 
    3. Set BASE_IP_ADDRESS = "root@<IP>" where IP is the ip address of
       base machine on which containers are created.
 
    4. Set ADS_SERVER_VM_ID to CTID of container running ADS.
-      ADS_SERVER_VM_ID = "<CTID>" 
+      ADS_SERVER_VM_ID = "<CTID>"
 
-   5. SUBNET field to match with the subnet of your base machine
-      If the ip address of your base machine is 10.2.58.XXX, 
-      SUBNET = ["10.2.58.12/28"]
+   5. SUBNET field to match with the subnet of your base machine If
+      the ip address of your base machine is 10.2.58.XXX, SUBNET =
+      ["10.2.58.12/28"]
 
 ** Commands to Manage the Service
 + As root, go into =src= directory and run make to start ADS:
@@ -215,11 +216,15 @@ At this point, ADS is running and you are ready to deploy a lab.
 - To deploy your lab ::
      - Open the browser.
      - Enter =localhost:8080= as the url.
-     - The form requires you to fill =Lab ID=. You may assign any new alphanumeric name as a lab id.
-     - Also, fill in the =Repo url= with the url of the lab sources on github repository.
+     - The form requires you to fill =Lab ID=. You may assign any new
+       alphanumeric name as a lab id.
+     - Also, fill in the =Repo url= with the url of the lab sources on
+       github repository.
      - Click =submit= to deploy your lab.
-     - If the deployment is successful, an =IP address= will appear in the same browser window.
-     - Enter the =IP address= in the address bar to view the newly deployed lab.
+     - If the deployment is successful, an =IP address= will appear in
+       the same browser window.
+     - Enter the =IP address= in the address bar to view the newly
+       deployed lab.
 
 
 
