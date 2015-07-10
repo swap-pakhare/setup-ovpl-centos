@@ -115,6 +115,6 @@ sudo root  ./centos_prepare_ovpl.sh
 #+END_EXAMPLE
 
    Your machine is now ready with prerequisites of ADS. Follow these
-   [[https://github.com/vlead/ovpl/blob/develop/docs/how-to-deploy-lab-on-centos-platform.org][instructions]] to deploy a lab.
+   [[https://github.com/vlead/ovpl/blob/master/docs/how-to-deploy-a-lab.org][instructions]] to deploy a lab.
 
 
