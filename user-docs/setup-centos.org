@@ -1,6 +1,6 @@
-#+title:  How to Setup CentOS as a Deployment Platform and How to Deploy a Lab
-#+Author: Thirumal Ravula and Venkatesh Choppella
-#+Date:   [2014-10-01 Wed]
+#+Title:  How to Setup CentOS as a Deployment Platform
+#+Author: Khushpreet Kaur
+#+Date:   [2015-07-09 Thurs]
 
 #+SETUPFILE: ./org-templates/level-0.org
 #+LINK_HOME: ./index.html
@@ -72,23 +72,32 @@ Please use the structure of the LIK, and change directory to =lik-release-0.5.0/
 cd lik-release-0.5.0/ovpl-kit/scripts
 #+END_EXAMPLE
 
-** Edit the configurations
-   
-   Edit file =config.sh=.
-
+** Edit the configurations to set proxy
+   Edit =config.sh= to set up proxies
 #+BEGIN_EXAMPLE
 cd scripts
 vim config.sh
 #+END_EXAMPLE
 
-
 Edit the config file to set the =http_proxy= and =https_proxy= fields.
 If there are no proxies to be set, leave the fields unchanged.
 The snippet below shows how to set proxies.
-#+BEGIN_EXAMPLE
-export http_proxy="http://proxy.vlabs.ac.in:8080"
-export https_proxy="http://proxy.vlabs.ac.in:8080"
-#+END_EXAMPLE
+
+   + To set the proxies.
+#+begin_src example
+    "ENVIRONMENT": {
+        "HTTP_PROXY":"http://proxy. vlabs.ac.in:8080",
+        "HTTPS_PROXY":"http://proxy.vlabs.ac.in:8080"
+    },
+#+end_src
+
+   + if no proxies are used, 
+#+begin_src example
+    "ENVIRONMENT": {
+        "HTTP_PROXY":"",
+        "HTTPS_PROXY":""
+    },
+#+end_src
 
 ** Get the =openVZ= template
 
@@ -104,27 +113,7 @@ cd ../scripts
 sudo root  ./centos_prepare_ovpl.sh
 #+END_EXAMPLE
 
-** Run =make= to start OVPL
-#+BEGIN_EXAMPLE
-cd ../ovpl/src/
-sudo root make
-#+END_EXAMPLE
-
-* Deploy a Lab
-
-At this point, OVPL services are running and you are ready to deploy a lab.
-
-- To deploy your lab ::
-     - Open the browser.
-     - Enter =localhost:8080= as the url.
-     - The form requires you to fill =Lab ID=. You may assign any new alphanumeric name as a lab id.
-     - Also, fill in the =Repo url= with the url of the lab sources on github repository.
-     - Click =submit= to deploy your lab.
-     - If the deployment is successful, an =IP address= will appear in the same browser window.
-     - Enter the =IP address= in the address bar to view the newly deployed lab.
-
-
-
-
+   Your machine is now ready with prerequisites of ADS. Follow these
+   [[https://github.com/vlead/ovpl/blob/develop/docs/how-to-deploy-lab-on-centos-platform.org][instructions]] to deploy a lab.
 
 
