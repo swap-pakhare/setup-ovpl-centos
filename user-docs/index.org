@@ -31,5 +31,5 @@ for setting up OVPL:
 
 * Setting up CentOS as a Lab Deployment Platform & Deploying a Lab
 
-Follow these [[./setup-centos.org][/instructions/]] to set up your machine running CentOS as a lab deployment platform.
+Follow these [[https://github.com/vlead/setup-ovpl-centos/blob/master/user-docs/setup-centos.org][instructions]] to set up your machine running CentOS as a lab deployment platform.
     
