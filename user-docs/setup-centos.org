@@ -76,7 +76,6 @@ cd lik-release-0.5.0/ovpl-kit/scripts
 ** Edit the configurations to set proxy
    Edit =config.sh= to set up proxies
 #+BEGIN_EXAMPLE
-cd scripts
 vim config.sh
 #+END_EXAMPLE
 
@@ -111,7 +110,7 @@ wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-x86_64.tar.gz
 ** Run the script to prepare centos
 #+BEGIN_EXAMPLE
 cd ../scripts
-sudo root  ./centos_prepare_ovpl.sh
+sudo ./centos_prepare_ovpl.sh
 #+END_EXAMPLE
 
    Your machine is now ready with prerequisites of ADS. Follow these
