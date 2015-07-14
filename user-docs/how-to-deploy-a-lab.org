@@ -13,14 +13,12 @@
 #+PROPERTY: exports code
 #+PROPERTY: eval no
 
- Check [[../setup-centos-ovpl/user-docs/setup-centos.html][prerequisites]] to run ADS (Auto Deployment Service) as a
- Service.  If these all prerequisites are already exists, please Continue with the following
- instructions:
-
+ 
 * Settings for ADS 
-  
-  Execute the following steps, to configure and then run ADS as a
-  service:
+  Check [[../setup-centos-ovpl/user-docs/setup-centos.html][prerequisites]] to run ADS (Auto Deployment Service) as a
+  Service.  If these all prerequisites are already exists, please
+  Continue with the following instructions to configure and then run
+  ADS as a service:
 
 ** Edit the file =ovpl/config/config.json= 
 #+begin_src example
