@@ -2,9 +2,7 @@
 #+AUTHOR:    Khushpreet Kaur
 #+DATE:      2015-07-10 Friday
 
-#+SETUPFILE: ./org-templates/level-0.org
-#+LINK_HOME: ./index.html
-#+LINK_UP:   ./index.html
+#+SETUPFILE: ./org-templates/level-2.org
 
 #+OPTIONS: LaTeX:t          Do the right thing automatically (MathJax)
 #+OPTIONS: ^:nil
