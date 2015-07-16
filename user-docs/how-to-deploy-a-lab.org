@@ -7,11 +7,13 @@
 #+LINK_UP:   ./index.html
 
 #+OPTIONS: LaTeX:t          Do the right thing automatically (MathJax)
+#+OPTIONS: ^:nil
 
 #+PROPERTY: results output
 #+PROPERTY: tangle no
 #+PROPERTY: exports code
 #+PROPERTY: eval no
+
 
  
 * Settings for ADS 
@@ -20,7 +22,8 @@
   Continue with the following instructions to configure and then run
   ADS as a service:
 
-** Edit the file =ovpl/config/config.json= 
+** Main Settings
+   Edit the file =ovpl/config/config.json= 
 #+begin_src example
 cd ../ovpl/config
 vim config.json
@@ -84,9 +87,7 @@ cp sample_authorized_users.py authorized_users.py
 
   + Add actual email addresses of authorized users.
 
-
-
-*** Settings for CentOSVZAdapter
+** Settings for CentOSVZAdapter
    
    Edit the file =ovpl/src/adapters/settings.py= to set the following:
 #+begin_src example
