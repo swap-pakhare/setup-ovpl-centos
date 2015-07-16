@@ -4,9 +4,10 @@
 
 #+SETUPFILE: ./org-templates/level-0.org
 #+LINK_HOME: ./index.html
-#+LINK_UP:   ./index.html
+#+LINK_UP:   ./how-to-deploy-a-lab.html
 
 #+OPTIONS: LaTeX:t          Do the right thing automatically (MathJax)
+#+OPTIONS: ^:nil
 
 #+PROPERTY: results output
 #+PROPERTY: tangle no
@@ -113,4 +114,4 @@ sudo ./centos_prepare_ovpl.sh
 #+END_EXAMPLE
 
    Your machine is now ready with prerequisites of ADS. Follow these
-   [[https://github.com/vlead/ovpl/blob/master/docs/how-to-deploy-a-lab.org][instructions]] to deploy a lab.
+   [[https://github.com/vlead/setup-ovpl-centos/blob/master/user-docs/how-to-deploy-a-lab.org][instructions]] to deploy a lab.
