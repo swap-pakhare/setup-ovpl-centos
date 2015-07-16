@@ -3,7 +3,7 @@ USER-DOCS=user-docs/
 #SCRIPTS=scripts/
 #META=meta/
 
-all:  publish
+all:  final-publish
 
 publish: init
 	emacs --script user-docs/elisp/publish.el
@@ -14,6 +14,19 @@ publish: init
 	mv ${DEST}img ${DEST}${USER-DOCS}
 	rsync -raz --progress ./scripts ${DEST}
 	rsync -raz --progress ./meta ${DEST}
+
+final-publish: init
+	sed -i 's/level-0.org/level-1.org/' ${USER-DOCS}/setup-centos.org
+	sed -i 's/level-0.org/level-2.org/' ${USER-DOCS}/how-to-deploy-a-lab.org
+	emacs --script user-docs/elisp/publish.el
+	rm -rf ${DEST}*~
+	mv ${DEST}*.html ${DEST}${USER-DOCS}
+	mv ${DEST}org-templates ${DEST}${USER-DOCS}
+	mv ${DEST}style ${DEST}${USER-DOCS}
+	mv ${DEST}img ${DEST}${USER-DOCS}
+	rsync -raz --progress ./scripts ${DEST}
+	rsync -raz --progress ./meta ${DEST}
+
 
 init:
 	rm -rf ${DEST}
