@@ -1,0 +1,115 @@
+#+Title:  How to Setup CentOS as a Deployment Platform
+#+Author: Khushpreet Kaur
+#+Date:   [2015-07-09 Thurs]
+
+#+SETUPFILE: ../org-templates/level-1.org
+
+#+OPTIONS: LaTeX:t          Do the right thing automatically (MathJax)
+#+OPTIONS: ^:nil
+
+#+PROPERTY: results output
+#+PROPERTY: tangle no
+#+PROPERTY: exports code
+#+PROPERTY: eval no
+
+* Objective
+
+The objective of these instructions is to set up the =Centos= on your
+machine as a virtual lab deployment platform.
+
+* Prerequisites
+
+** Your machine has CentOS version =6.5= or greater running on it. 
+
+You can know that by typing
+#+BEGIN_example
+cat /etc/issue
+#+END_example
+
+The output should be 
+#+BEGIN_EXAMPLE
+CentOS release 6.5 (Final)
+#+END_EXAMPLE
+
+** Your machine has a 64 bit architecture
+
+To find out, type
+#+BEGIN_example
+grep flags /proc/cpuinfo
+#+END_example
+
+
+The output should include the word "lm" (for long mode, indicating 64
+bit) as one of the flags.
+
+#+BEGIN_EXAMPLE
+flags : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov
+pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe nx rdtscp *lm*
+constant_tsc arch_perfmon pebs bts xtopology nonstop_tsc aperfmperf
+pni dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1
+sse4_2 popcnt lahf_lm arat dtherm tpr_shadow vnmi flexpriority ept
+vpid
+#+END_EXAMPLE
+
+** You are on the Internet
+
+The installation pulls packages from open repositories and you will need
+an Internet connection to run the scripts successfully. 
+
+** You have sudo permissions as root
+The scripts install software using yum - a package management
+utility - which can run only in sudo root mode.  Therefore, invoke the
+script with a =sudo= command.  Be careful!  Reckless execution of
+commands with root permission could make your machine inoperable!
+
+* Instructions for installation
+** Changing to the right directory
+
+Please use the structure of the LIK, and change directory to =lik-release-0.5.0/ovpl-kit/scripts= 
+
+#+BEGIN_EXAMPLE
+cd lik-release-0.5.0/ovpl-kit/scripts
+#+END_EXAMPLE
+
+** Edit the configurations to set proxy
+   Edit =config.sh= to set up proxies
+#+BEGIN_EXAMPLE
+vim config.sh
+#+END_EXAMPLE
+
+Edit the config file to set the =http_proxy= and =https_proxy= fields.
+If there are no proxies to be set, leave the fields unchanged.
+The snippet below shows how to set proxies.
+
+   + To set the proxies.
+#+begin_src example
+    "ENVIRONMENT": {
+        "HTTP_PROXY":"http://proxy. vlabs.ac.in:8080",
+        "HTTPS_PROXY":"http://proxy.vlabs.ac.in:8080"
+    },
+#+end_src
+
+   + if no proxies are used, 
+#+begin_src example
+    "ENVIRONMENT": {
+        "HTTP_PROXY":"",
+        "HTTPS_PROXY":""
+    },
+#+end_src
+
+** Get the =openVZ= template
+
+=cd= to the =meta= directory.  Download the  openVZ template OS:
+#+begin_example
+cd ../meta  
+wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-x86_64.tar.gz
+#+end_example
+
+** Run the script to prepare centos
+#+BEGIN_EXAMPLE
+cd ../scripts
+sudo ./centos_prepare_ovpl.sh
+#+END_EXAMPLE
+
+   Your machine is now ready with prerequisites of ADS. Follow these
+   [[https://github.com/vlead/setup-ovpl-centos/blob/master/user-docs/how-to-deploy-a-lab.org][instructions]] to deploy a lab.

@@ -1,0 +1,400 @@
+#+TITLE: Setup
+#+AUTHOR: VLEAD
+#+DATE: [2016-07-26 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction 
+  This document illustrates the shell scripts required to setup =ADS= service
+
+* Configuration
+  1. Set your http proxy based on your network's configuration.
+  2. Ask your network administrator if you are unsure about the value
+  3. Example
+     #+BEGIN_EXAMPLE
+     export http_proxy="http://proxy.ac.in:8080"
+     export https_proxy="http://proxy.ac.in:8080"
+     #+END_EXAMPLE
+     
+#+NAME: config
+#+BEGIN_SRC shell 
+
+export http_proxy=""
+export https_proxy=""
+
+# 0 implies not in IIIT LAN and 1 implies IIIT LAN
+#example export iiit_lan=0
+export iiit_lan=0
+
+#+END_SRC
+
+* Centos_prepare_ovpl
+  Installs dependencies python-devel, git, pip mongodb and openvz
+#+NAME: centos_prepare_ovpl
+#+BEGIN_SRC shell 
+#!/bin/bash
+# Script to setup a fresh installation of CentOS to run OVPL
+# 
+
+# check if script is run as root
+if [[ $UID -ne 0 ]]; then
+  echo ""
+  echo "$0 must be run as root!"
+  echo "Exiting.."
+  exit 1
+fi
+
+# check if meta directory exists
+if [[ ! -d "../meta" ]]; then
+  echo ""
+  echo "You don't have the necessary files."
+  echo "Please contact the author of the script."
+  exit 1
+fi
+
+# read proxy settings from config file
+source ./config.sh
+
+if [[ -n $http_proxy ]]; then
+  echo $http_proxy
+  export http_proxy=$http_proxy
+fi
+if [[ -n $https_proxy ]]; then
+  export https_proxy=$https_proxy
+fi
+
+yum update -y
+yum install -y vim rsync
+
+echo "Install GIT"
+./install_git.sh
+if [$? -ne 0 ]; then
+  echo ""
+  echo "Error installing GIT. Quitting!"
+  exit 1
+fi
+
+export PATH="$PATH:/usr/local/git/bin"
+echo "Invoking install_dependencies.sh"
+./install_dependencies.sh
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "Error installing dependencies. Quitting!"
+  exit 1
+fi
+
+echo "Invoking install_openvz.sh"
+./install_openvz.sh
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "Error installing OpenVZ. Quitting!"
+  exit 1
+fi
+
+echo "Invoking install_mongodb.sh"
+./install_mongodb.sh
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "Error installing MongoDB. Quitting!"
+  exit 1
+fi
+
+exit 0
+
+#+END_SRC
+
+* Dependencies
+
+#+NAME: dependencies
+#+BEGIN_SRC shell
+#!/bin/bash
+
+meta_dir="../meta"
+
+echo ""
+echo "Setting up EPEL repo.."
+#wget http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+rpm -ivh $meta_dir/epel-release-6-8.noarch.rpm
+#rm epel-release-6.8.noarch.rpm
+echo ""
+
+echo "Installing dependencies.. yum -y install gcc python-devel.x86_64 python-pip ssh rsync"
+yum -y install gcc python-devel.x86_64 python-pip
+
+echo "====== Installing python-setuptools using yum -y install python-setuptools ======"
+yum -y install python-setuptools
+
+
+cd /root
+echo "======== Cloning OVPL source code ========="
+git clone https://github.com/vlead/ovpl.git
+cd ovpl
+git checkout -b develop remotes/origin/develop
+echo "===== Changed to ovpl directory ======="
+echo "===== Running python setup.py install ========="
+python setup.py install
+
+exit 0
+
+#+END_SRC
+
+* Install git
+
+#+NAME: git_install
+#+BEGIN_SRC shell 
+#!/bin/bash
+# Script to install git
+# Installs: Dependencies: curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils perl-devel
+
+yum erase -y git
+yum -y update
+yum install -y curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils
+yum install -y perl-devel
+
+cd /usr/src
+echo "Get the git sources"
+wget https://www.kernel.org/pub/software/scm/git/git-2.0.1.tar.gz
+tar xzf git-2.0.1.tar.gz
+cd git-2.0.1
+echo "Install git from sources"
+make prefix=/usr/local/git all
+make prefix=/usr/local/git install
+echo "export PATH=$PATH:/usr/local/git/bin" >> /etc/bashrc
+source /etc/bashrc
+echo $PATH
+
+exit 0
+
+
+#+END_SRC
+
+* Install mongodb
+#+NAME: mongodb_install
+#+BEGIN_SRC shell 
+#!/bin/bash
+# Script to setup repo and install MongoDB
+
+meta_dir="../meta"
+
+echo ""
+echo "Setting up MongoDB repo.."
+cp $meta_dir/mongodb.repo /etc/yum.repos.d/mongodb.repo
+
+
+echo ""
+echo "Installing MongoDB.."
+yum -y install mongodb-org
+
+echo ""
+echo "Starting mongod service.."
+service mongod start
+echo ""
+echo "Congrats! You have setup OVPL successfully!!! :-)"
+echo "Now run 'make' from inside the src directory"
+echo " of OVPL to start the services."
+
+exit 0
+
+#+END_SRC
+
+* Install openvz
+
+#+NAME: openvz_install
+#+BEGIN_SRC shell 
+
+#!/bin/bash
+
+# install wget
+yum install wget -y
+
+# Script to setup OpenVZ repo, install and configure OpenVZ
+
+scripts_dir="../scripts"
+meta_dir="../meta"
+vz_template_file="ubuntu-12.04-custom-x86_64.tar.gz"
+
+echo "==============="
+echo "Downloading $vz_template_file file to $meta_dir directory"
+echo "==============="
+echo "iiit_lan = $iiit_lan"
+if [ $iiit_lan -eq 1 ]
+then
+    echo "In the IIIT lan, have to unset proxy while downloading from LAN"
+    unset http_proxy
+    unset https_proxy
+    cd $meta_dir
+    wget http://files.vlabs.ac.in/downloads/templates/ubuntu-12.04-custom-x86_64.tar.gz
+    cd $scripts_dir
+    source ./config.sh
+    echo $http_proxy
+else
+    cd $meta_dir
+    wget http://files.vlabs.ac.in/downloads/templates/ubuntu-12.04-custom-x86_64.tar.gz
+fi
+
+echo ""
+echo "Setting up OpenVZ repo.."
+#wget -P /etc/yum.repos.d/ http://ftp.openvz.org/openvz.repo
+cp $meta_dir/openvz.repo /etc/yum.repos.d/openvz.repo
+rpm --import http://ftp.openvz.org/RPM-GPG-Key-OpenVZ
+
+echo ""
+echo "Installing the OpenVZ kernel.."
+wget http://download.openvz.org/kernel/branches/rhel6-2.6.32/042stab123.9/vzkernel-firmware-2.6.32-042stab123.9.noarch.rpm
+rpm -ivh vzkernel-firmware-2.6.32-042stab123.9.noarch.rpm 
+yum -y install vzkernel
+
+echo ""
+echo "Configuring OpenVZ.."
+cat $meta_dir/updated_sysctl.conf >> /etc/sysctl.conf
+echo "SELINUX=disabled" > /etc/sysconfig/selinux
+
+echo ""
+echo "Installing OpenVZ tools.."
+yum -y install vzctl vzquota ploop vzstats
+
+if [[ ! -f $meta_dir/$vz_template_file ]]; then
+  echo ""
+  echo "VZ OS template file not found!"
+  echo "Please obtain an VZ OS template image and manually"
+  echo "copy that into /vz/template/cache folder."
+  echo "Failing the above step will result in OVPL not working."
+  echo "Please contact VLEAD for further clarifications."
+else
+  echo ""
+  echo "Copying the default OS template for containers.."
+  cp $meta_dir/$vz_template_file /vz/template/cache
+fi
+
+# Not needed!? Not sure.
+echo "Allowing multiple subnets to reside on the same network interface.."
+sed -i 's/#NEIGHBOUR_DEVS=all/NEIGHBOUR_DEVS=all/g' /etc/vz/vz.conf
+sed -i 's/#NEIGHBOUR_DEVS=detect/NEIGHBOUR_DEVS=all/g' /etc/vz/vz.conf
+#
+echo "Setting container layout to default to ploop (VM in a file).."
+sed -i 's/VE_LAYOUT=ploop/VE_LAYOUT=simfs/g' /etc/vz/vz.conf
+#
+echo "Setting Ubuntu 12.04 64bit to be the default template.."
+sed -i 's/centos-6-x86/ubuntu-12.04-x86_64/g' /etc/vz/vz.conf
+
+#set nf_conntrack ip_conntrack_disable_ve0 to 0
+sed -i 's/=1/=0/g' /etc/modprobe.d/openvz.conf
+#
+#sysctl -p
+#
+#Setting the IP table rules
+cp $meta_dir/iptables-save /etc/sysconfig/iptables
+#service iptables restart
+
+echo ""
+echo "Finished installing OpenVZ"
+
+exit 0
+
+#+END_SRC
+
+* Install vagrant
+
+#+NAME: vagrant_install
+#+BEGIN_SRC shell 
+
+#!/bin/bash
+
+setupDir="/root/setup-ovpl-centos"
+
+function echo_status
+{
+  if [ $1 -ne 0 ]; then
+    echo ""
+    echo "Error executing ( "$2" ). Quitting!"
+    exit 1
+  else
+    echo "Successfully executed ( "$2" )."
+  fi
+}
+
+source ./config.sh
+
+echo $http_proxy
+echo $https_proxy
+
+#UnInstall Vagrant
+echo "Uninstalling Vagrant"
+rm -rf /opt/vagrant
+rm -rf /usr/bin/vagrant
+rm -rf "/root/VirtualBox VMs"
+rm -rf /root/.vagrant
+rm -rf /root/.vagrant.d
+rm -rf /root/centos
+
+#UnInstall virtual box
+echo "Uninstalling virtual box"
+apt-get remove -y virtualbox-4.3
+apt-get -y autoremove
+apt-get -y clean
+
+#Add virtualbox source to /etc/apt/sources.list
+source_list="deb http://download.virtualbox.org/virtualbox/debian trusty contrib"
+sed -i '/virtualbox/d' /etc/apt/sources.list
+echo $source_list >> /etc/apt/sources.list
+
+#Download Oracle public key for apt-secure and add the key
+wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+
+#Install Virtual Box 
+echo "#Install Virtual Box "
+sudo apt-get -y update
+command="sudo apt-get install -y virtualbox-4.3"
+$command
+echo_status $? "$command"
+rm -rf oracle_vbox.asc
+
+#Install Vagrant
+echo "#Install Vagrant"
+wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.1_x86_64.deb
+command="dpkg -i vagrant_1.7.1_x86_64.deb"
+$command
+echo_status $? "$command"
+rm -rf vagrant_1.7.1_x86_64.deb
+
+exit 0
+
+#+END_SRC
+
+* =otherdocs=
+* Tangle                                                        :boilerplate:
+** centos_prepare_ovpl
+#+BEGIN_SRC shell :tangle centos_prepare_ovpl.sh :eval no :noweb yes
+<<centos_prepare_ovpl>>
+#+END_SRC
+** configuration
+#+BEGIN_SRC shell :tangle config.sh :eval no :noweb yes
+<<config>>
+#+END_SRC
+
+** dependencies
+#+BEGIN_SRC shell :tangle install_dependencies.sh :eval no :noweb yes
+<<dependencies>>
+#+END_SRC
+
+** install git
+#+BEGIN_SRC shell :tangle install_git.sh :eval no :noweb yes
+<<mongodb_git>>
+#+END_SRC
+
+** install mongodb
+#+BEGIN_SRC shell :tangle install_mongodb.sh :eval no :noweb yes
+<<mongodb_install>>
+#+END_SRC
+
+** install openvz
+#+BEGIN_SRC shell :tangle install_openvz.sh :eval no :noweb yes
+<<install_openvz>>
+#+END_SRC
+
+** install vagrant
+#+BEGIN_SRC shell :tangle install_vagrant.sh :eval no :noweb yes
+<<install_vagrant>>
+#+END_SRC

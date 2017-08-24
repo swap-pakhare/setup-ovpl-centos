@@ -1,0 +1,136 @@
+#+TITLE: Run ADS using an existing vagrant box
+#+AUTHOR: VLEAD
+#+DATE: [2017-08-24 Thur]
+#+SETUPFILE: ../org-templates/level-1.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  This document describes the steps for setting up =ADS= service in development
+  environment using an existing vagrant box.
+
+* Assumption 
+  The developer environment should have installed the
+  following software. 
+  1. vagrant - any version
+  2. virtualbox: any of the following versions - 4.0.x,
+     4.1.x, 4.2.x, 4.3.x, 5.0.x, and 5.1.x
+
+  Please refer [[https://www.vagrantup.com/docs/virtualbox/][virtualbox]] and [[https://www.vagrantup.com/docs/installation/][vagrant]] installation steps for
+  installing the above software in development environment.
+
+
+* Steps to run =ADS= service
+  1. Download the ads vagrant box
+     #+BEGIN_EXAMPLE
+     wget http://files.vlabs.ac.in/downloads/vagrant-boxes/ads-on-centos.box
+     #+END_EXAMPLE
+  2. Add downloaded box to vagrant box list
+     #+BEGIN_EXAMPLE
+     vagrant box add ads-on-centos ads-on-centos.box
+     #+END_EXAMPLE
+  3. Check whether downloaded =ads-on-centos= box is added.
+     #+BEGIN_EXAMPLE
+     vagrant box list
+     #+END_EXAMPLE
+  4. Above command must list =ads-on-centos= 
+  5. Intialize the machine
+     #+BEGIN_EXAMPLE
+     cd ~
+     mkdir ads-on-centos
+     cd ads-on-centos
+     vagrant init ads-on-centos
+     #+END_EXAMPLE
+  6. Edit the =Vagrantfile= using editor (like e.g emacs, vim, etc.) and
+     uncomment below line by removing =#= in the beginning of the line to set
+     the vagrant to use private network (e.g 192.168.33.10)
+     #+BEGIN_EXAMPLE
+     #config.vm.network "private_network", ip: "192.168.33.10"
+     config.vm.network "private_network", ip: "192.168.33.10"
+     #+END_EXAMPLE
+  7. Boot the machine
+     #+BEGIN_EXAMPLE
+     vagrant up
+     #+END_EXAMPLE
+  8. Login in to the machine
+     #+BEGIN_EXAMPLE
+     vagrant ssh
+     #+END_EXAMPLE
+  9. Commands to Manage the Service
+     + As root, go into =ovpl= directory and run =manage_services.sh= file:
+       #+BEGIN_EXAMPLE
+       sudo su -
+       cd /root/ovpl
+       ./manage_services.sh (or) ./manage_services.sh start
+       #+END_EXAMPLE
+
+     + To stop the services
+       #+BEGIN_EXAMPLE
+       ./manage_services.sh stop
+       #+END_EXAMPLE
+
+     + To stop or start specific service use =./manage_services.sh [action]
+       [services]=
+       - [action]   = start (or) stop
+       - [services] = LOGGER (or) ADAPTER (or) CONTROLLER
+
+       #+BEGIN_EXAMPLE
+       ./manage_services.sh start LOGGER
+       #+END_EXAMPLE
+     + For more help use =./manage_services.sh --help=.
+     
+  10. Setup Google Oauth credentials
+      + Create a project at [[https://console.developers.google.com][Google Dashboard]] and create =Oauth= credentials.
+      + On successful creation of credentials set Authorized redirect URIs to
+      #+BEGIN_EXAMPLE
+      http://local-ads.com:8080/login/authorized
+      #+END_EXAMPLE
+      + Provide =CONSUMER_KEY= and =CONSUMER_SECRET= in
+        =/var/www/html/ads-web-app/config.py=.
+        #+BEGIN_SRC 
+        CONSUMER_KEY = "<consumerkey>"
+        CONSUMER_SECRET = "<consumer secret key>"
+        #+END_SRC
+
+  11. Setting up local DNS entry
+      + Edit =/etc/hosts= file on base machine os to assign the domain name to
+        =192.168.33.10=. This is to be done for successful redirection page for
+        google authorization page
+      + Execute below command to reflect the domain name change in =/etc/hosts=
+        (Note :- Below command should be executed on base machine os not on vagrant machine)
+      #+BEGIN_EXAMPLE
+      echo '192.168.33.10   local-ads.com' >> /etc/hosts
+      #+END_EXAMPLE
+  12. Setup ADS credentials
+      + Add emails ids to =AUTHORIZED_USERS=
+        #+BEGIN_SRC 
+        AUTHORIZED_USERS = [
+        "heregoesemail@gmail.com"
+        ]
+        #+END_SRC
+
+  13. Run =ads-web-app= service
+      #+BEGIN_SRC 
+      cd /root/ovpl/src/ads-web-app/
+      python app.py &
+      #+END_SRC
+  14. Access =ADS= on browser
+      - Open the location =http://local-ads:8080= from the
+        browser and provide the lab id, lab sources url and version/tag.
+      - View the logs at /root/logs/ovpl.log by
+        #+BEGIN_SRC
+        tail -f /root/logs/ovpl.log
+        #+END_SRC
+     
+  15. Download more =openvz= templates 
+      + =ads-on-centos.box= comes with default template
+        =ubuntu-12.04-custom-x86_64.tar.gz= and =ADS= uses this template to deploy the
+        lab/service
+      + Download more =openvz= templates from below [[http://files.vlabs.ac.in/downloads/templates/][url]] and configure =ADS= to use
+        the template at =/root/ovpl/config/adapters/centos_openvz_config.py=
+      
+  16. To create =openvz= template refer [[https://github.com/vlead/vlead-templates/blob/develop/openvz-templates/index.org#introduction][link]]
+
+
+
