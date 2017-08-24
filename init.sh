@@ -2,10 +2,10 @@
 
 if [ -d literate-tools ]; then
     echo "literate-tools already present"
-    (cd literate-tools; git pull)
+    (cd literate-tools; git checkout readtheorg;git pull)
 else
     git clone https://github.com/vlead/literate-tools.git
-    (cd literate-tools)
+    (cd literate-tools; git checkout readtheorg)
 fi
 
 if [ -L tangle-make ]; then

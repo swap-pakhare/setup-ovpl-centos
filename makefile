@@ -14,6 +14,6 @@ init:
 
 build: init
 	make -f tangle-make -k all
-	rsync -avz --progress meta ${CODE_DIR}
+	rsync -avz --progress src/meta ${CODE_DIR}
 clean:	
 	make -f tangle-make clean
