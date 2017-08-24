@@ -15,13 +15,13 @@ then
     unset http_proxy
     unset https_proxy
     cd $meta_dir
-    wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-x86_64.tar.gz
+    wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-with-emacs-x86_64.tar.gz
     cd $scripts_dir
     source ./config.sh
     echo $http_proxy
 else
     cd $meta_dir
-    wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-x86_64.tar.gz
+    wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-with-emacs-x86_64.tar.gz
 fi
 
 echo ""
