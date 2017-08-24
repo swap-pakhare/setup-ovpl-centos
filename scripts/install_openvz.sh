@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# install wget
+yum install wget -y
+
 # Script to setup OpenVZ repo, install and configure OpenVZ
 
 scripts_dir="../scripts"
@@ -15,13 +19,13 @@ then
     unset http_proxy
     unset https_proxy
     cd $meta_dir
-    wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-with-emacs-x86_64.tar.gz
+    wget http://files.vlabs.ac.in/downloads/templates/ubuntu-12.04-custom-x86_64.tar.gz
     cd $scripts_dir
     source ./config.sh
     echo $http_proxy
 else
     cd $meta_dir
-    wget community.virtual-labs.ac.in/downloads/ubuntu-12.04-custom-with-emacs-x86_64.tar.gz
+    wget http://files.vlabs.ac.in/downloads/templates/ubuntu-12.04-custom-x86_64.tar.gz
 fi
 
 echo ""
@@ -32,6 +36,8 @@ rpm --import http://ftp.openvz.org/RPM-GPG-Key-OpenVZ
 
 echo ""
 echo "Installing the OpenVZ kernel.."
+wget http://download.openvz.org/kernel/branches/rhel6-2.6.32/042stab123.9/vzkernel-firmware-2.6.32-042stab123.9.noarch.rpm
+rpm -ivh vzkernel-firmware-2.6.32-042stab123.9.noarch.rpm 
 yum -y install vzkernel
 
 echo ""
