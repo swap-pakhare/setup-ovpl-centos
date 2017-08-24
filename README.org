@@ -36,7 +36,6 @@
     #+BEGIN_EXAMPLE
     cd /root/ovpl
     ./manage_services.sh start
-
     #+END_EXAMPLE
 
 * Setup =ADS= on a machine running ubuntu:*
