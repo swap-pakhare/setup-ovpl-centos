@@ -113,6 +113,16 @@ python app.py &
 #+begin_src example
 tail -f /root/logs/ovpl.log
 #+end_src
+- Download more =openvz= templates 
+  + =ads-on-centos.box= comes with default template
+    =ubuntu-12.04-custom-x86_64.tar.gz= and =ADS= uses this template to deploy the
+    lab/service
+  + Download more =openvz= templates from below url and configure =ADS= to use
+    the template at =/root/ovpl/config/adapters/centos_openvz_config.py=
+#+BEGIN_EXAMPLE
+http://files.vlabs.ac.in/downloads/templates/
+#+END_EXAMPLE
+  + To create =openvz= template refer [[https://github.com/vlead/vlead-templates/blob/develop/openvz-templates/index.org#introduction][link]]
 
 
 
