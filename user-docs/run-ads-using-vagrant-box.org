@@ -88,7 +88,7 @@
       http://local-ads.com:8080/login/authorized
       #+END_EXAMPLE
       + Provide =CONSUMER_KEY= and =CONSUMER_SECRET= in
-        =/var/www/html/ads-web-app/config.py=.
+        =/root/ovpl/src/ads-web-app/config.py=.
         #+BEGIN_SRC 
         CONSUMER_KEY = "<consumerkey>"
         CONSUMER_SECRET = "<consumer secret key>"
