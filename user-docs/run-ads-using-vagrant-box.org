@@ -59,10 +59,13 @@
      vagrant ssh
      #+END_EXAMPLE
   9. Commands to Manage the Service
-     + As root, go into =ovpl= directory and run =manage_services.sh= file:
+     + As root, go into =ovpl= directory, checkout branch to =develop= pull the
+       changes and run =manage_services.sh= file
        #+BEGIN_EXAMPLE
        sudo su -
        cd /root/ovpl
+       git checkout develop
+       git pull origin develop
        ./manage_services.sh (or) ./manage_services.sh start
        #+END_EXAMPLE
 
