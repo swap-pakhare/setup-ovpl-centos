@@ -10,6 +10,7 @@
   This document describes the steps for setting up =ADS= service in development
   environment using an existing vagrant box.
 
+
 * Assumption 
   The developer environment should have installed the
   following software. 
@@ -110,12 +111,20 @@
         ]
         #+END_SRC
 
-  13. Run =ads-web-app= service
+  13. Proxy settings
+
+      export proxy global variables if your =network= is behind proxy
+      #+BEGIN_EXAMPLE
+      export http_proxy="http://proxy.iiit.ac.in:8080"
+      export https_proxy="http://proxy.iiit.ac.in:8080"
+      #+END_EXAMPLE
+      
+  14. Run =ads-web-app= service
       #+BEGIN_SRC 
       cd /root/ovpl/src/ads-web-app/
       python app.py &
       #+END_SRC
-  14. Access =ADS= on browser
+  15. Access =ADS= on browser
       - Open the location =http://local-ads:8080= from the
         browser and provide the lab id, lab sources url and version/tag.
       - View the logs at /root/logs/ovpl.log by
@@ -123,14 +132,14 @@
         tail -f /root/logs/ovpl.log
         #+END_SRC
      
-  15. Download more =openvz= templates 
+  16. Download more =openvz= templates 
       + =ads-on-centos.box= comes with default template
         =ubuntu-12.04-custom-x86_64.tar.gz= and =ADS= uses this template to deploy the
         lab/service
       + Download more =openvz= templates from below [[http://files.vlabs.ac.in/downloads/templates/][url]] and configure =ADS= to use
         the template at =/root/ovpl/config/adapters/centos_openvz_config.py=
       
-  16. To create =openvz= template refer [[https://github.com/vlead/vlead-templates/blob/develop/openvz-templates/index.org#introduction][link]]
+  17. To create =openvz= template refer [[https://github.com/vlead/vlead-templates/blob/develop/openvz-templates/index.org#introduction][link]]
 
 
 
