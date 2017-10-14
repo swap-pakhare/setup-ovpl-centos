@@ -141,7 +141,8 @@
       
   14. Run =ads-web-app= service
       #+BEGIN_SRC 
-      cd /root/ovpl/src/ads-web-app/ python app.py &
+      cd /root/ovpl/src/ads-web-app/ 
+      python app.py &
       #+END_SRC
 
   15. Access =ADS= on browser
