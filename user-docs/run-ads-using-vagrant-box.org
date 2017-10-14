@@ -1,6 +1,6 @@
 #+TITLE: Run ADS using an existing vagrant box
 #+AUTHOR: VLEAD
-#+DATE: [2017-08-24 Thur]
+#+DATE: [2017-08-24 Thu]
 #+SETUPFILE: ./org-templates/level-0.org
 #+TAGS: boilerplate(b)
 #+EXCLUDE_TAGS: boilerplate
@@ -13,7 +13,7 @@
 
 * Assumption 
   The developer environment should have installed the
-  following software. 
+  following software.
   1. vagrant - any version
   2. virtualbox: any of the following versions - 4.0.x,
      4.1.x, 4.2.x, 4.3.x, 5.0.x, and 5.1.x
@@ -33,56 +33,56 @@
      #+END_EXAMPLE
   3. Check whether downloaded =ads-on-centos= box is added.
      #+BEGIN_EXAMPLE
-     vagrant box list
+     vagrant box list 
      #+END_EXAMPLE
   4. Above command must list =ads-on-centos= 
   5. Intialize the machine
      #+BEGIN_EXAMPLE
-     cd ~
-     mkdir ads-on-centos
-     cd ads-on-centos
-     vagrant init ads-on-centos
+     cd ~ 
+     mkdir ads-on-centos 
+     cd ads-on-centos 
+     vagrant init ads-on-centos 
      #+END_EXAMPLE
   6. Edit the =Vagrantfile= using editor (like e.g emacs,
      vim, etc.) and uncomment below line by removing =#= in
      the beginning of the line to set the vagrant to use
      private network (e.g 192.168.33.10)
      #+BEGIN_EXAMPLE
-     #config.vm.network "private_network", ip: "192.168.33.10"
-     config.vm.network "private_network", ip: "192.168.33.10"
-     #+END_EXAMPLE
+     #config.vm.network "private_network", ip: "192.168.33.10" 
+     config.vm.network "private_network", ip: "192.168.33.10" #+END_EXAMPLE
   7. Boot the machine
      #+BEGIN_EXAMPLE
-     vagrant up
+     vagrant up 
      #+END_EXAMPLE
   8. Login in to the machine
      #+BEGIN_EXAMPLE
-     vagrant ssh
+     vagrant ssh 
      #+END_EXAMPLE
   9. Commands to Manage the Service
      + As root, go into =ovpl= directory, checkout branch to
        =develop= pull the changes and run
        =manage_services.sh= file
        #+BEGIN_EXAMPLE
-       sudo su -
-       cd /root/ovpl
-       git checkout develop
-       git pull origin develop
-       ./manage_services.sh (or) ./manage_services.sh start
-       #+END_EXAMPLE
+       sudo su - 
+       cd /root/ovpl 
+       git checkout develop 
+       git pull origin develop 
+       ./manage_services.sh (or)
+       ./manage_services.sh start 
+      #+END_EXAMPLE
 
      + To stop the services
        #+BEGIN_EXAMPLE
-       ./manage_services.sh stop
+       ./manage_services.sh stop 
        #+END_EXAMPLE
 
-     + To stop or start specific service use =./manage_services.sh [action]
-       [services]=
+     + To stop or start specific service use
+       =./manage_services.sh [action] [services]=
        - [action]   = start (or) stop
        - [services] = LOGGER (or) ADAPTER (or) CONTROLLER
 
        #+BEGIN_EXAMPLE
-       ./manage_services.sh start LOGGER
+       ./manage_services.sh start LOGGER 
        #+END_EXAMPLE
      + For more help use =./manage_services.sh --help=.
      
@@ -90,17 +90,23 @@
       + Create a project at [[https://console.developers.google.com][Google Dashboard]] and create
         =Oauth= credentials.
       + On successful creation of credentials set Authorized redirect URIs to
-      #+BEGIN_EXAMPLE
-      http://local-ads.com:8080/login/authorized
-      #+END_EXAMPLE
+        #+BEGIN_EXAMPLE
+        http://local-ads.com:8080/login/authorized
+        #+END_EXAMPLE
       + Provide =CONSUMER_KEY= and =CONSUMER_SECRET= in
         =/root/ovpl/src/ads-web-app/config.py=.
         #+BEGIN_SRC 
-        CONSUMER_KEY = "<consumerkey>"
-        CONSUMER_SECRET = "<consumer secret key>"
+        CONSUMER_KEY = "<consumerkey>" 
+        CONSUMER_SECRET = "<consumer secret key>" 
         #+END_SRC
 
-  11. Setting up local DNS entry
+  11. Setup ADS credentials in the same file =/root/ovpl/src/ads-web-app/config.py=
+      + Add email ids to =AUTHORIZED_USERS=
+        #+BEGIN_SRC 
+        AUTHORIZED_USERS = [ "heregoesemail@gmail.com" ]
+        #+END_SRC
+
+  12. Setting up local DNS entry
 
       + Edit =/etc/hosts= file on host machine os to assign
         the domain name to =192.168.33.10=. This is to be
@@ -109,22 +115,16 @@
 
       + Execute below command to reflect the domain name
         change in =/etc/hosts= (Note :- Below command should
-        be executed on host machine os not on vagrant
+        be executed on host machine and not on vagrant
         machine)
-      #+BEGIN_EXAMPLE
-      echo '192.168.33.10   local-ads.com' >> /etc/hosts
-      #+END_EXAMPLE
-  12. Setup ADS credentials
-      + Add emails ids to =AUTHORIZED_USERS=
-        #+BEGIN_SRC 
-        AUTHORIZED_USERS = [
-        "heregoesemail@gmail.com"
-        ]
-        #+END_SRC
+        #+BEGIN_EXAMPLE
+        echo '192.168.33.10 local-ads.com' >> /etc/hosts
+        #+END_EXAMPLE
 
   13. Proxy settings
 
-      export proxy global variables if your =network= is behind proxy
+      export proxy global variables if your =network= is
+      behind proxy
       #+BEGIN_EXAMPLE
       export http_proxy="http://proxy.iiit.ac.in:8080"
       export https_proxy="http://proxy.iiit.ac.in:8080"
@@ -132,8 +132,7 @@
       
   14. Run =ads-web-app= service
       #+BEGIN_SRC 
-      cd /root/ovpl/src/ads-web-app/
-      python app.py &
+      cd /root/ovpl/src/ads-web-app/ python app.py &
       #+END_SRC
 
   15. Access =ADS= on browser
@@ -142,8 +141,7 @@
         and version/tag.
       - View the logs at /root/logs/ovpl.log by
         #+BEGIN_SRC
-        tail -f /root/logs/ovpl.log
-        #+END_SRC
+        tail -f /root/logs/ovpl.log #+END_SRC
      
   16. Download more =openvz= templates 
       + =ads-on-centos.box= comes with default template
@@ -155,7 +153,3 @@
         =/root/ovpl/config/adapters/centos_openvz_config.py=
       
   17. To create =openvz= template refer [[https://github.com/vlead/vlead-templates/blob/develop/openvz-templates/index.org#introduction][link]]
-
-
-
-  
