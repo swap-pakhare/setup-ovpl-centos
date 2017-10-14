@@ -151,7 +151,8 @@
         and version/tag.
       - View the logs at /root/logs/ovpl.log by
         #+BEGIN_SRC
-        tail -f /root/logs/ovpl.log #+END_SRC
+        tail -f /root/logs/ovpl.log 
+        #+END_SRC
      
   16. Download more =openvz= templates 
       + =ads-on-centos.box= comes with default template
