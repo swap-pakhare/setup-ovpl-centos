@@ -27,15 +27,19 @@
      #+BEGIN_EXAMPLE
      wget http://files.vlabs.ac.in/downloads/vagrant-boxes/ads-on-centos.box
      #+END_EXAMPLE
+
   2. Add downloaded box to vagrant box list
      #+BEGIN_EXAMPLE
      vagrant box add ads-on-centos ads-on-centos.box
      #+END_EXAMPLE
+
   3. Check whether downloaded =ads-on-centos= box is added.
      #+BEGIN_EXAMPLE
      vagrant box list 
      #+END_EXAMPLE
+
   4. Above command must list =ads-on-centos= 
+
   5. Intialize the machine
      #+BEGIN_EXAMPLE
      cd ~ 
@@ -43,21 +47,26 @@
      cd ads-on-centos 
      vagrant init ads-on-centos 
      #+END_EXAMPLE
+
   6. Edit the =Vagrantfile= using editor (like e.g emacs,
      vim, etc.) and uncomment below line by removing =#= in
      the beginning of the line to set the vagrant to use
      private network (e.g 192.168.33.10)
      #+BEGIN_EXAMPLE
      #config.vm.network "private_network", ip: "192.168.33.10" 
-     config.vm.network "private_network", ip: "192.168.33.10" #+END_EXAMPLE
+     config.vm.network "private_network", ip: "192.168.33.10" 
+     #+END_EXAMPLE
+
   7. Boot the machine
      #+BEGIN_EXAMPLE
      vagrant up 
      #+END_EXAMPLE
+
   8. Login in to the machine
      #+BEGIN_EXAMPLE
      vagrant ssh 
      #+END_EXAMPLE
+
   9. Commands to Manage the Service
      + As root, go into =ovpl= directory, checkout branch to
        =develop= pull the changes and run
