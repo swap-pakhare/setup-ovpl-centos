@@ -20,7 +20,6 @@ cd /root
 echo "======== Cloning OVPL source code ========="
 git clone https://github.com/vlead/ovpl.git
 cd ovpl
-git checkout -b develop remotes/origin/develop
 echo "===== Changed to ovpl directory ======="
 echo "===== Running python setup.py install ========="
 python setup.py install
