@@ -95,6 +95,18 @@
        #+END_EXAMPLE
      + For more help use =./manage_services.sh --help=.
      
+     + if your network is behind proxy, configure
+       =HTTP_PROXY= and =HTTPS_PROXY= of =ENVIRONMENT=
+       variable in =/root/ovpl/config/config.json= file
+      #+BEGIN_EXAMPLE
+      "ENVIRONMENT": {
+      "HTTP_PROXY":"http://proxy.iiit.ac.in:8080",
+      "HTTPS_PROXY":"http://proxy.iiit.ac.in:8080"
+       .......,
+       ........
+      },
+      #+END_EXAMPLE
+     
   10. Setup Google Oauth credentials
       + Create a project at [[https://console.developers.google.com][Google Dashboard]] and create
         =Oauth= credentials.
@@ -114,6 +126,8 @@
         #+BEGIN_SRC 
         AUTHORIZED_USERS = [ "heregoesemail@gmail.com" ]
         #+END_SRC
+
+  
 
   12. Setting up local DNS entry
 
