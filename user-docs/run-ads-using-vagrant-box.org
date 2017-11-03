@@ -11,6 +11,7 @@
   service in development environment using an existing
   vagrant box.
 
+
 * Assumption 
   The developer environment should have installed the
   following software.
@@ -62,52 +63,95 @@
      vagrant up 
      #+END_EXAMPLE
 
-  8. Login in to the machine
+  8. Login in to the machine as root.  Sometimes, login will
+     succeed after a few tries. 
      #+BEGIN_EXAMPLE
      vagrant ssh 
+     sudo su -
      #+END_EXAMPLE
 
-  9. Commands to Manage the Service
-     + As root, go into =ovpl= directory, checkout branch to
-       =develop= pull the changes and run
-       =manage_services.sh= file
+  9. Pull the latest ADS source code
+     + As root, go into =/root/ovpl= directory, checkout branch to
+       =develop= and pull the changes. 
        #+BEGIN_EXAMPLE
-       sudo su - 
-       cd /root/ovpl 
-       git checkout develop 
-       git pull origin develop 
-       ./manage_services.sh (or)
-       ./manage_services.sh start 
-      #+END_EXAMPLE
-
-     + To stop the services
-       #+BEGIN_EXAMPLE
-       ./manage_services.sh stop 
+        cd /root/ovpl 
+        git checkout develop 
+        git pull origin develop
        #+END_EXAMPLE
 
-     + To stop or start specific service use
-       =./manage_services.sh [action] [services]=
-       - [action]   = start (or) stop
-       - [services] = LOGGER (or) ADAPTER (or) CONTROLLER
+  10. Configure Proxy
+      + if your network is behind proxy, configure
+        =HTTP_PROXY= and =HTTPS_PROXY= of =ENVIRONMENT=
+        variable in =/root/ovpl/config/config.json= file
+        #+BEGIN_EXAMPLE
+        "ENVIRONMENT": {
+        "HTTP_PROXY":"http://proxy.iiit.ac.in:8080",
+        "HTTPS_PROXY":"http://proxy.iiit.ac.in:8080"
+         .......,
+         ........
+        },
+        #+END_EXAMPLE
 
-       #+BEGIN_EXAMPLE
-       ./manage_services.sh start LOGGER 
-       #+END_EXAMPLE
-     + For more help use =./manage_services.sh --help=.
-     
-     + if your network is behind proxy, configure
-       =HTTP_PROXY= and =HTTPS_PROXY= of =ENVIRONMENT=
-       variable in =/root/ovpl/config/config.json= file
-      #+BEGIN_EXAMPLE
-      "ENVIRONMENT": {
-      "HTTP_PROXY":"http://proxy.iiit.ac.in:8080",
-      "HTTPS_PROXY":"http://proxy.iiit.ac.in:8080"
-       .......,
-       ........
-      },
-      #+END_EXAMPLE
-     
-  10. Setup Google Oauth credentials
+  11. Configure OS template
+
+      + ADS supoort of different operating systems :: ADS
+           currently supports the following OS and the
+           corresponding versions and the web server.  All
+           the three are for x86, 64 bit architecture.
+        1. Ubuntu 12.04 with apache
+
+        2. Ubuntu 14.04 with nginx
+
+        3. Centos 6.9 with apache
+
+      + Support for Ubuntu 12.04 :: =ads-on-centos.box= comes
+           with default template.  If the lab to be deployed
+           on a machine with OS =ubuntu 12.04=, then no
+           configuration changes are required to the ADS.
+           The file =labspec.json= in the lab that needs
+           deployment specifies the OS and its version.
+           #+BEGIN_EXAMPLE
+           "platform": {
+             "os": "ubuntu",
+             "osVersion": "12",
+             "arch": "x64",
+             .....
+             .....
+           #+END_EXAMPLE
+
+           ADS picks up the right template from the
+           configuration file
+           =/root/ovpl/config/adapters/centos_openvz_config.py=.  
+           #+BEGIN_EXAMPLE
+           supported_template = [
+             {'os': 'UBUNTU', 'version': '12.04',
+              'id': 'ubuntu-12.04-custom-with-emacs-x86_64'}
+           ]
+           #+END_EXAMPLE
+
+      + Configure for a diffetent OS :: If the application is to be
+           deployed on Ubuntu 14.04, do the following
+        1. add the following lines to
+           =/root/ovpl/config/adapters/centos_openvz_config.py=.
+           #+BEGIN_EXAMPLE
+        supported_template = [
+        {'os': 'UBUNTU', 'version': '12.04',
+         'id': 'ubuntu-12.04-custom-with-emacs-x86_64'},
+        {'os': 'UBUNTU', 'version': '14.04',
+         'id': 'ubuntu-14.04_x86_64-custom-emacs-nginx'}
+        #+END_EXAMPLE
+
+        2. download the os template
+           =ubuntu-14.04_x86_64-custom-emacs-nginx.tar.gz=
+           from
+           =http://files.vlabs.ac.in/downloads/templates/=
+           to =/vz/templates/cache/= directory.
+           #+BEGIN_EXAMPLE
+           cd /vz/templates/cache/
+           wget http://files.vlabs.ac.in/downloads/templates/ubuntu-14.04_x86_64-custom-emacs-nginx.tar.gz
+           #+END_EXAMPLE
+
+  12. Setup Google Oauth credentials
       + Create a project at [[https://console.developers.google.com][Google Dashboard]] and create
         =Oauth= credentials.
       + On successful creation of credentials set Authorized redirect URIs to
@@ -116,24 +160,66 @@
         #+END_EXAMPLE
       + Provide =CONSUMER_KEY= and =CONSUMER_SECRET= in
         =/root/ovpl/src/ads-web-app/config.py=.
-        #+BEGIN_SRC 
+        #+BEGIN_EXAMPLE
         CONSUMER_KEY = "<consumerkey>" 
         CONSUMER_SECRET = "<consumer secret key>" 
-        #+END_SRC
+        #+END_EXAMPLE
 
-  11. Setup ADS credentials in the same file =/root/ovpl/src/ads-web-app/config.py=
+  13. Setup ADS credentials in the same file =/root/ovpl/src/ads-web-app/config.py=
       + Add email ids to =AUTHORIZED_USERS=
-        #+BEGIN_SRC 
+        #+BEGIN_EXAMPLE
         AUTHORIZED_USERS = [ "heregoesemail@gmail.com" ]
-        #+END_SRC
+        #+END_EXAMPLE
 
-  
+  14. Start ADS services
+      + As root, go to =ovpl= directory and run
+        =manage_services.sh= file
+        #+BEGIN_EXAMPLE
+        cd /root/ovpl 
+        ./manage_services.sh (or)
+        ./manage_services.sh start 
+       #+END_EXAMPLE
 
-  12. Setting up local DNS entry
+      + Other commands to manage the services
+        + To stop the services
+        #+BEGIN_EXAMPLE
+        ./manage_services.sh stop 
+        #+END_EXAMPLE
+        + To stop or start specific service use
+        =./manage_services.sh [action] [services]=
+        - [action]   = start (or) stop
+        - [services] = LOGGER (or) ADAPTER (or) CONTROLLER
 
-      + Edit =/etc/hosts= file on host machine os to assign
-        the domain name to =192.168.33.10=. This is to be
-        done for successful redirection page for google
+        #+BEGIN_EXAMPLE
+        ./manage_services.sh start LOGGER 
+        #+END_EXAMPLE
+        + For more help use =./manage_services.sh --help=.
+
+  15. Start the ADS web application service
+      + Set Proxy :: If the network is behind a proxy,
+           export proxy variables.  The below example shows
+           for a network behind =IIIT= proxy. 
+        #+BEGIN_EXAMPLE
+         export http_proxy="http://proxy.iiit.ac.in:8080"
+         export https_proxy="http://proxy.iiit.ac.in:8080"
+        #+END_EXAMPLE
+
+      + Run =ads-web-app= service ::
+        #+BEGIN_EXAMPLE
+         cd /root/ovpl/src/ads-web-app/ 
+         python app.py &
+        #+END_EXAMPLE
+
+  16. The above steps configure the machine and start the
+      ADS services.
+
+  17. Set up local DNS entry on the host machine.  This is
+      the machine where the browser is started.
+
+      + Edit =/etc/hosts= file on host machine where the ADS
+        application is run from the browser to assign the
+        domain name to =192.168.33.10=. This is to be done
+        for successful redirection page for google
         authorization page
 
       + Execute below command to reflect the domain name
@@ -144,37 +230,11 @@
         echo '192.168.33.10 local-ads.com' >> /etc/hosts
         #+END_EXAMPLE
 
-  13. Proxy settings
-
-      export proxy global variables if your =network= is
-      behind proxy
-      #+BEGIN_EXAMPLE
-      export http_proxy="http://proxy.iiit.ac.in:8080"
-      export https_proxy="http://proxy.iiit.ac.in:8080"
-      #+END_EXAMPLE
-      
-  14. Run =ads-web-app= service
-      #+BEGIN_SRC 
-      cd /root/ovpl/src/ads-web-app/ 
-      python app.py &
-      #+END_SRC
-
-  15. Access =ADS= on browser
+  18. Access =ADS= on browser
       - Open the location =http://local-ads.com:8080= from
         the browser and provide the lab id, lab sources url
         and version/tag.
       - View the logs at /root/logs/ovpl.log by
-        #+BEGIN_SRC
+        #+BEGIN_EXAMPLE
         tail -f /root/logs/ovpl.log 
-        #+END_SRC
-     
-  16. Download more =openvz= templates 
-      + =ads-on-centos.box= comes with default template
-        =ubuntu-12.04-custom-x86_64.tar.gz= and =ADS= uses
-        this template to deploy the lab/service
-
-      + Download more =openvz= templates from below [[http://files.vlabs.ac.in/downloads/templates/][url]] and
-        configure =ADS= to use the template at
-        =/root/ovpl/config/adapters/centos_openvz_config.py=
-      
-  17. To create =openvz= template refer [[https://github.com/vlead/vlead-templates/blob/develop/openvz-templates/index.org#introduction][link]]
+        #+END_EXAMPLE
