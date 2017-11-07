@@ -10,7 +10,19 @@
   This document lists all the steps necessary to provision
   [[https://github.com/vlead/ovpl][auto deployment service]].
 
-* Create container from base template
+* Requirements
+  1. Install git 2.7.4, mongodb, gcc, python-devel,
+     python-pip, python-setuptools
+  2. Install python packages -- tornado, requests, pymongo,
+     netaddr, sh and boto
 
+* Steps
+** Create container from base template
+ 
+** Install git
+
+* Install developer tools
+
+* Install mongodb
   
 
