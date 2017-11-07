@@ -1,0 +1,91 @@
+#+TITLE: Install git from sources
+#+AUTHOR: VLEAD
+#+DATE: [2017-11-07 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  This document lists the steps required to install software
+  necessary to setup a base CentOS 6.9 machine.
+
+* Install Base Software
+** Install [[https://www.google.co.in/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwiA1t_J16nXAhXKP48KHQeoBiwQFgglMAA&url=https%253A%252F%252Ffedoraproject.org%252Fwiki%252FEPEL&usg=AOvVaw1yI5PuhryGSuc3tbA5koOK][EPEL]]
+   Enable REPL by executing the following [[https://www.liquidweb.com/kb/enable-epel-repository/][commands]]. 
+#+NAME: epel
+#+BEGIN_SRC sh
+yum install epel-release -y
+
+#+END_SRC
+
+** Install git
+   This version will be =1.7.1=.  This version will later be
+   upgraded for full functionality of git. 
+#+NAME: git
+#+BEGIN_SRC sh
+yum install git -y
+
+#+END_SRC
+
+** Install emacs
+   Emacs is an editor.  Installation of emacs is necessary
+   since VLEAD's default editor is emacs.
+
+#+NAME: emacs
+#+BEGIN_SRC sh
+yum install emacs -y
+
+#+END_SRC
+   The above command will install emacs with version 23.x
+
+** Install [[http://www.linuxfromscratch.org/blfs/view/svn/basicnet/bind-utils.html][bind-utils]]
+   [[https://wiki.linuxfoundation.org/networking/net-tools][net-tools]] are already installed. Installing bind-utils
+   will install =dig=, =host= and =nslookup=
+
+#+NAME: bind-utils
+#+BEGIN_SRC sh
+yum install bind-utils -y
+
+#+END_SRC
+   
+** Update for latest release
+   This will ensure that all latest supported software is
+   installed. 
+
+#+NAME: update
+#+BEGIN_SRC sh
+yum update -y
+
+#+END_SRC
+
+** Exit the script
+
+#+NAME: exit
+#+BEGIN_SRC sh
+exit 0
+#+END_SRC
+
+** This will be bash script
+#+NAME: shebang
+#+BEGIN_SRC sh
+#!/bin/bash
+
+#+END_SRC
+
+** Tangle to a file
+
+
+#+BEGIN_SRC sh :tangle scripts/base-sw.sh :eval no :noweb yes
+<<shebang>>
+<<update>>
+<<epel>>
+<<git>>
+<<emacs>>
+<<bind-utils>>
+<<exit>>
+#+END_SRC
+
+
+
+
