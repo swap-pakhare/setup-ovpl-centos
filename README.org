@@ -1,76 +1,12 @@
-* What is it?  
-  Scripts to setup [ADS](https://github.com/vlead/ovpl) on a fresh
-  installation of CentOS >=6.5 64 bit or Ubuntu >= 12.04
+#+TITLE: README to provision and configure ADS 
+#+AUTHOR: VLEAD
+#+DATE: [2017-11-06 Mon]
+#+SETUPFILE: ./org-templates/level-0.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
 
-* Setup =ADS= on a machine running centos >= 6.5*
 
- 1. At the command prompt, login as root user using
-    #+BEGIN_EXAMPLE
-    sudo su -
-    #+END_EXAMPLE
- 
- 2. Enter into the home directory for the root user
-    #+BEGIN_EXAMPLE
-    cd /root/
-    #+END_EXAMPLE
+This repository takes a base template and provisions auto
+deployment service. Refer [[index]] for more information. 
 
- 3. Clone the =setup-ovpl-centos= repository from github
-    #+BEGIN_EXAMPLE
-    git clone https://github.com/vlead/setup-ovpl-centos.git 
-    #+END_EXAMPLE
-      
- 4. Edit the =config.sh= file in the =scripts= folder and put appropriate proxy
-    settings in it. If there is no proxy to be set, leave it blank.
-    #+BEGIN_EXAMPLE
-    cd setup-ovpl-centos/scripts/
-    vim config.sh
-    #+END_EXAMPLE
-
- 5. Run the =centos_prepare_ovpl.sh= script as a root user. This sets up OVPL
-    and all its dependencies successfully:
-    #+BEGIN_EXAMPLE
-    bash centos_prepare_ovpl.sh
-    #+END_EXAMPLE
-
- 6. For starting the OVPL services, follow the steps below:
-    #+BEGIN_EXAMPLE
-    cd /root/ovpl
-    ./manage_services.sh start
-    #+END_EXAMPLE
-
-* Setup =ADS= on a machine running ubuntu:*
-  1. At the command prompt, login as root user using
-    #+BEGIN_EXAMPLE
-    sudo su
-    #+END_EXAMPLE
-  2. Enter into the home directory for the root user
-    #+BEGIN_EXAMPLE
-    cd /root/
-    #+END_EXAMPLE
-
-  3. Clone the =setup-ovpl-centos= repository from github
-    #+BEGIN_EXAMPLE
-    git clone https://github.com/vlead/setup-ovpl-centos.git 
-    #+END_EXAMPLE
-      
-  4. Enter into the newly cloned directory
-    #+BEGIN_EXAMPLE
-    cd setup-ovpl-centos/
-    #+END_EXAMPLE
-
-  5. hange directory to =scripts=
-    #+BEGIN_EXAMPLE
-    cd scripts
-    #+END_EXAMPLE
-  6. Edit the =config.sh= file in the =scripts= folder and put appropriate
-     proxy settings in it. If there is no proxy to be set, leave it blank.
-
-  7. Run the =install_vagrant.sh= script:     
-    #+BEGIN_EXAMPLE
-    bash install_vagrant.sh
-    #+END_EXAMPLE
-
-  8. Step(7) installs =virtualbox= and =vagrant= software.  Use the [[https://github.com/vlead/setup-ovpl-centos/blob/develop/user-docs/run-ads-using-vagrant-box.org#run-ads-using-an-existing-vagrant-box][document]] to
-     use the existing vagrant-box which comes with =ADS= and =Openvz=
-
-       

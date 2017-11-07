@@ -1,49 +1,31 @@
-DEST=build/
-USER-DOCS=user-docs/
-#SCRIPTS=scripts/
-#META=meta/
+SHELL := /bin/bash
 
-all:  final-publish
+CODE_DIR=build/code
+DOC_DIR=build/docs
+SRC_DIR=src/runtime
+PWD=$(shell pwd)
+LINT_FILE=${PWD}/${CODE_DIR}/lint_output
+EXIT_FILE=${PWD}/exit.txt
+STATUS=0
 
-publish: init
-	emacs --script user-docs/elisp/publish.el
-	rm -rf ${DEST}*~
-	mv ${DEST}*.html ${DEST}${USER-DOCS}
-	mv ${DEST}org-templates ${DEST}${USER-DOCS}
-	mv ${DEST}style ${DEST}${USER-DOCS}
-	mv ${DEST}img ${DEST}${USER-DOCS}
-	rsync -raz --progress ./scripts ${DEST}
-	rsync -raz --progress ./meta ${DEST}
+all:  build run-py-tests
 
-final-publish: init
-	sed -i 's/level-0.org/level-1.org/' ${USER-DOCS}/setup-centos.org
-	sed -i 's/level-0.org/level-2.org/' ${USER-DOCS}/how-to-deploy-a-lab.org
-	emacs --script user-docs/elisp/publish.el
-	rm -rf ${DEST}*~
-	mv ${DEST}*.html ${DEST}${USER-DOCS}
-	mv ${DEST}org-templates ${DEST}${USER-DOCS}
-	mv ${DEST}style ${DEST}${USER-DOCS}
-	mv ${DEST}img ${DEST}${USER-DOCS}
-	rsync -raz --progress ./scripts ${DEST}
-	rsync -raz --progress ./meta ${DEST}
+init: 
+	./init.sh
 
+build: init
+	make -f tangle-make -k all
 
-init:
-	rm -rf ${DEST}
-	mkdir -p ${DEST}
-	mkdir -p ${DEST}${USER-DOCS}
+install-pep:
+	sudo pip install pep8
 
+lint:  install-pep
+	pep8 --ignore=E302 ${PWD}/${CODE_DIR} > ${LINT_FILE};
 
-server:
-	python -m SimpleHTTPServer 6001
+build-with-lint: build lint
 
-export:
-	rsync -auvz ${DEST}presentation/* letshelp@devel.virtual-labs.ac.in:/var/www/2012-10-08-integration-sprint/
+run-py-tests:
+	export PYTHONPATH=${PWD}/${CODE_DIR}; find ${PWD}/${CODE_DIR} -name '*test_*.py' -exec python '{}' \;
 
-clean:
-	rm -rf ${DEST}
-
-archive:
-	(cd ${DEST}; zip -r presentation.zip presentation)
-
-
+clean:	
+	make -f tangle-make clean
