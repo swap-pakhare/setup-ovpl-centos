@@ -11,7 +11,8 @@
   on centos 6.9.
 
 * Installation of MongoDB
-  Refer [[https://www.liquidweb.com/kb/how-to-install-mongodb-on-centos-6/][post]]
+  The version of MongoDB installed is V2.6.12.  Refer [[https://www.liquidweb.com/kb/how-to-install-mongodb-on-centos-6/][post]]
+  for installation instructions. 
 
 ** Update the machine
 #+NAME: update
