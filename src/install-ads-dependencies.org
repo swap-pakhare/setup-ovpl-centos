@@ -29,6 +29,7 @@ yum update -y
 
 #+NAME: utilities
 #+BEGIN_SRC sh 
+echo ""
 echo "Installing python utilities"
 yum -y install gcc python-devel.x86_64 python-pip python-setuptools
 
