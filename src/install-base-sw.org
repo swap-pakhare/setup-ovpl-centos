@@ -15,6 +15,7 @@
    Enable REPL by executing the following [[https://www.liquidweb.com/kb/enable-epel-repository/][commands]]. 
 #+NAME: epel
 #+BEGIN_SRC sh
+echo "Installing repl packages"
 yum install epel-release -y
 
 #+END_SRC
@@ -24,6 +25,7 @@ yum install epel-release -y
    upgraded for full functionality of git. 
 #+NAME: git
 #+BEGIN_SRC sh
+echo "Installing git"
 yum install git -y
 
 #+END_SRC
@@ -34,6 +36,7 @@ yum install git -y
 
 #+NAME: emacs
 #+BEGIN_SRC sh
+echo "Installing emacs"
 yum install emacs -y
 
 #+END_SRC
@@ -45,6 +48,7 @@ yum install emacs -y
 
 #+NAME: bind-utils
 #+BEGIN_SRC sh
+echo "Installing bind utils"
 yum install bind-utils -y
 
 #+END_SRC
@@ -55,6 +59,7 @@ yum install bind-utils -y
 
 #+NAME: update
 #+BEGIN_SRC sh
+echo "update the software"
 yum update -y
 
 #+END_SRC
