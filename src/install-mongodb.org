@@ -1,0 +1,84 @@
+#+TITLE: Install MongoDB
+#+AUTHOR: VLEAD
+#+DATE: [2017-11-07 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  This document lists the steps required to install MongoDB
+  on centos 6.9.
+
+* Installation of MongoDB
+  Refer [[https://www.liquidweb.com/kb/how-to-install-mongodb-on-centos-6/][post]]
+
+** Update the machine
+#+NAME: update
+#+BEGIN_SRC sh 
+yum update -y
+
+#+END_SRC
+
+** Add MongoDB repo
+   This step is necessary for the =yum= package installer to
+   pick the right packages to install. 
+
+#+NAME: repo
+#+BEGIN_SRC sh 
+echo ""
+echo "Update the repo.."
+echo '[mongodb]' > /etc/yum.repos.d/mongodb.repo
+echo 'name=MongoDB Repository' >> /etc/yum.repos.d/mongodb.repo
+echo 'baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/' >> /etc/yum.repos.d/mongodb.repo
+echo 'gpgcheck=0' >> /etc/yum.repos.d/mongodb.repo
+echo 'enabled=1' >> /etc/yum.repos.d/mongodb.repo
+
+#+END_SRC
+
+** Install MongoDB
+#+NAME: install
+#+BEGIN_SRC sh
+echo ""
+echo "Installing MongoDB.."
+yum -y install mongodb-org
+
+#+END_SRC
+
+** Start MongoDB service
+#+NAME: service
+#+BEGIN_SRC sh
+echo ""
+echo "Starting mongod service.."
+service mongod start
+
+#+END_SRC
+
+** Bash
+   This script will be a bash script.
+#+NAME: shebang
+#+BEGIN_SRC sh
+#!/bin/bash
+
+#+END_SRC
+
+** Exit
+   Exit with return =0= when all is successful at the end. 
+
+#+NAME: exit
+#+BEGIN_SRC sh
+echo ""
+echo "Congrats! MongoDB is installed :-)"
+exit 0
+
+#+END_SRC
+
+* Tangle     :boilerplate:
+#+BEGIN_SRC sh :tangle scripts/install-mongodb.sh :eval no :noweb yes
+<<shebang>>
+<<update>>
+<<repo>>
+<<install>>
+<<service>>
+<<exit>>
+#+END_SRC
