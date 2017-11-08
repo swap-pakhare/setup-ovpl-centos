@@ -17,6 +17,8 @@
 ** Update the machine
 #+NAME: update
 #+BEGIN_SRC sh 
+echo ""
+echo "Update software.."
 yum update -y
 
 #+END_SRC

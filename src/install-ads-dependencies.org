@@ -1,0 +1,80 @@
+#+TITLE: Install Dependencies for Auto Deployment Service
+#+AUTHOR: VLEAD
+#+DATE: [2017-11-07 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  This document lists the steps required to install
+  dependencies for Auto Deployment Service.
+
+* Installation of Dependencies
+  To install software required to run the service, there are
+  couple of python utilities that help in the installation
+  of the dependencies.  These utilities will be installed
+  first.  After this, [[https://github.com/vlead/ovpl][ADS]] repo is cloned and dependencies
+  mentioned in the cloned repo are installed.
+
+** Update the machine
+#+NAME: update
+#+BEGIN_SRC sh 
+yum update -y
+
+#+END_SRC
+
+** Install Utilities
+   The utilities are python-pip and python-setuptools.
+
+#+NAME: utilities
+#+BEGIN_SRC sh 
+echo "Installing python utilities"
+yum -y install gcc python-devel.x86_64 python-pip python-setuptools
+
+#+END_SRC
+
+** Install ADS dependencies
+   Clone the ADS repository and install the dependencies.
+#+NAME: clone
+#+BEGIN_SRC sh
+echo ""
+echo "Clone ADS repo.."
+cd /root
+echo "======== Cloning OVPL source code ========="
+git clone https://github.com/vlead/ovpl.git
+cd ovpl
+echo "===== Changed to ovpl directory ======="
+echo "===== Running python setup.py install ========="
+python setup.py install
+
+#+END_SRC
+
+** Bash
+   This script will be a bash script.
+#+NAME: shebang
+#+BEGIN_SRC sh
+#!/bin/bash
+
+#+END_SRC
+
+
+** Exit
+   Exit with return =0= when all is successful at the end. 
+
+#+NAME: exit
+#+BEGIN_SRC sh
+echo ""
+echo "Congrats! OVPL dependencies installed :-)"
+exit 0
+
+#+END_SRC
+
+* Tangle     :boilerplate:
+#+BEGIN_SRC sh :tangle scripts/install-ads-dependencies.sh :eval no :noweb yes
+<<shebang>>
+<<update>>
+<<utilities>>
+<<clone>>
+<<exit>>
+#+END_SRC
