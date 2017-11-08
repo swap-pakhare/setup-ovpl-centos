@@ -1,0 +1,174 @@
+#+TITLE: Install OpenVZ - container based virtualization
+#+AUTHOR: VLEAD
+#+DATE: [2017-11-07 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  This document lists the steps required to install =OpenVZ=
+  -- a container based virtualization for Linux -- on centos
+  6.9.
+
+* Installation of OpenVZ
+  Refer OpenVZ [[https://openvz.org/Quick_Installation_CentOS_6][post]]
+
+** Update the machine
+#+NAME: update
+#+BEGIN_SRC sh 
+yum update -y
+
+#+END_SRC
+
+** Set OpenVZ repo
+   =yum= package installer requires multiple packages for
+   the installation of OpenVZ.  To fetch these packages, it
+   will consult OpenVZ repo. 
+
+#+NAME: openvz-repo
+#+BEGIN_SRC sh 
+echo ""
+echo "Setting up OpenVZ repo.."
+wget -P /etc/yum.repos.d/ http://ftp.openvz.org/openvz.repo
+rpm --import http://ftp.openvz.org/RPM-GPG-Key-OpenVZ
+
+#+END_SRC
+
+** Install OpenVZ Kernel
+   
+#+NAME: install-openvz
+#+BEGIN_SRC sh 
+echo ""
+echo "Installing the OpenVZ kernel.."
+wget http://download.openvz.org/kernel/branches/rhel6-2.6.32/042stab123.9/vzkernel-firmware-2.6.32-042stab123.9.noarch.rpm
+rpm -ivh vzkernel-firmware-2.6.32-042stab123.9.noarch.rpm 
+yum install vzkernel -y
+
+#+END_SRC
+
+** Configure OpenVZ
+*** sysctl configuration
+#+NAME: sysctl
+#+BEGIN_SRC sh
+echo ""
+echo "Setting sysctl.conf.."
+sed -i 's/net.ipv4.ip_forward = 0/net.ipv4.ip_forward = 1/g' /etc/sysctl.conf
+echo 'net.ipv6.conf.default.forwarding = 1' >> /etc/sysctl.conf
+echo 'net.ipv6.conf.all.forwarding = 1' >> /etc/sysctl.conf
+echo 'net.ipv4.conf.default.proxy_arp = 0' >> /etc/sysctl.conf
+sed -i 's/net.ipv4.conf.all.rp_filter = 0/net.ipv4.conf.all.rp_filter = 1/g' /etc/sysctl.conf
+sed -i 's/kernel.sysrq = 0/kernel.sysrq = 1/g' /etc/sysctl.conf
+echo '# We do not want all our interfaces to send redirects' >> /etc/sysctl.conf
+echo 'net.ipv4.conf.default.send_redirects = 1' >> /etc/sysctl.conf
+echo 'net.ipv4.conf.all.send_redirects = 0' >> /etc/sysctl.conf
+
+#+END_SRC
+
+*** Disable SELinux
+    SELinux is [[https://wiki.centos.org/HowTos/Virtualization/OpenVZ][not compatible]] with OpenVZ, so disable it.
+#+NAME: selinux
+#+BEGIN_SRC sh
+echo ""
+echo "Disabling SELINUX.."
+echo "SELINUX=disabled" > /etc/sysconfig/selinux
+
+#+END_SRC
+
+*** Allow multiple subnets
+    Allow multiple subnets to reside on the same network
+    interface
+#+NAME: mult-subnets
+#+BEGIN_SRC sh
+echo ' '
+echo "Allowing multiple subnets to reside on the same network interface.."
+sed -i 's/#NEIGHBOUR_DEVS=all/NEIGHBOUR_DEVS=all/g' /etc/vz/vz.conf
+sed -i 's/#NEIGHBOUR_DEVS=detect/NEIGHBOUR_DEVS=all/g' /etc/vz/vz.conf
+
+#+END_SRC
+
+*** Layout to Simfs
+    Set container layout to simfs - VM in a file
+#+NAME: simfs
+#+BEGIN_SRC sh
+echo ' '
+echo "Setting container layout to default to simfs (VM in a file).."
+sed -i 's/VE_LAYOUT=ploop/VE_LAYOUT=simfs/g' /etc/vz/vz.conf
+#+END_SRC
+
+*** Disable nf_conntrack ip_conntrack_disable_ve0
+#+NAME: conntrack
+#+BEGIN_SRC sh
+sed -i 's/=1/=0/g' /etc/modprobe.d/openvz.conf
+
+#+END_SRC
+
+*** IpTables
+#+NAME: iptables
+#+BEGIN_SRC sh
+echo '*nat' > /etc/sysconfig/iptables
+echo ':PREROUTING ACCEPT [14:1825]' >> /etc/sysconfig/iptables
+echo ':POSTROUTING ACCEPT [0:0]' >> /etc/sysconfig/iptables
+echo ':OUTPUT ACCEPT [0:0]' >> /etc/sysconfig/iptables
+echo '-A POSTROUTING -j MASQUERADE ' >> /etc/sysconfig/iptables
+echo 'COMMIT' >> /etc/sysconfig/iptables
+echo '*mangle' >> /etc/sysconfig/iptables
+echo ':PREROUTING ACCEPT [76479:71529965]' >> /etc/sysconfig/iptables
+echo ':INPUT ACCEPT [48086:44315916]' >> /etc/sysconfig/iptables
+echo ':FORWARD ACCEPT [28300:27203685]' >> /etc/sysconfig/iptables
+echo ':OUTPUT ACCEPT [29931:1985432]' >> /etc/sysconfig/iptables
+echo ':POSTROUTING ACCEPT [58220:29188149]' >> /etc/sysconfig/iptables
+echo 'COMMIT' >> /etc/sysconfig/iptables
+echo '*filter' >> /etc/sysconfig/iptables
+echo ':INPUT ACCEPT [0:0]' >> /etc/sysconfig/iptables
+echo ':FORWARD ACCEPT [28300:27203685]' >> /etc/sysconfig/iptables
+echo ':OUTPUT ACCEPT [29920:1984464]' >> /etc/sysconfig/iptables
+echo 'COMMIT' >> /etc/sysconfig/iptables
+
+#+END_SRC
+
+** Install OpenVZ tools
+   Install vzctl vzquota ploop vzstats
+#+NAME: tools
+#+BEGIN_SRC sh
+echo ""
+echo "Installing OpenVZ tools.."
+yum -y install vzctl vzquota ploop vzstats
+
+#+END_SRC
+
+** Bash
+   This script will be a bash script.
+#+NAME: shebang
+#+BEGIN_SRC sh
+#!/bin/bash
+
+#+END_SRC
+
+** Exit
+   Exit with return =0= when all is successful at the end. 
+
+#+NAME: exit
+#+BEGIN_SRC sh
+echo ""
+echo "Finished installing OpenVZ"
+
+exit 0
+
+#+END_SRC
+
+* Tangle     :boilerplate:
+#+BEGIN_SRC sh :tangle scripts/install-openvz.sh :eval no :noweb yes
+<<shebang>>
+<<update>>
+<<openvz-repo>>
+<<install-openvz>>
+<<tools>>
+<<sysctl>>
+<<selinux>>
+<<mult-subnets>>
+<<simfs>>
+<<conntrack>>
+<<iptables>>
+<<exit>>
+#+END_SRC
