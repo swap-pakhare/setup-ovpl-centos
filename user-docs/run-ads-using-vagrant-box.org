@@ -18,10 +18,6 @@
   1. vagrant - 1.9.x
   2. virtualbox: 5.1.26
 
-  Please refer [[https://www.vagrantup.com/docs/virtualbox/][virtualbox]] and [[https://www.vagrantup.com/docs/installation/][vagrant]] installation steps for
-  installing the above software in development environment.
-
-
 * Steps to run =ADS= service
   1. Download the ads vagrant box
      #+BEGIN_EXAMPLE
