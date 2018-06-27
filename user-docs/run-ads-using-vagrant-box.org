@@ -89,72 +89,8 @@
         },
         #+END_EXAMPLE
       
-     + Set the COOKIE_SECRET value in CONTROLLER_CONFIG to
-       some long randomly generated string.
-       #+BEGIN_EXAMPLE
-       "COOKIE_SECRET": "<generate a long random UUID>",
-       #+END_EXAMPLE  
-
-  11. Configure OS template
-
-      + ADS supoort of different operating systems :: ADS
-           currently supports the following OS and the
-           corresponding versions and the web server.  All
-           the three are for x86, 64 bit architecture.
-        1. Ubuntu 12.04 with apache
-
-        2. Ubuntu 14.04 with nginx
-
-        3. Centos 6.9 with apache
-
-      + Support for Ubuntu 12.04 :: =ads-on-centos.box= comes
-           with default template.  If the lab to be deployed
-           on a machine with OS =ubuntu 12.04=, then no
-           configuration changes are required to the ADS.
-           The file =labspec.json= in the lab that needs
-           deployment specifies the OS and its version.
-           #+BEGIN_EXAMPLE
-           "platform": {
-             "os": "ubuntu",
-             "osVersion": "12",
-             "arch": "x64",
-             .....
-             .....
-           #+END_EXAMPLE
-
-           ADS picks up the right template from the
-           configuration file
-           =/root/ovpl/config/adapters/centos_openvz_config.py=.  
-           #+BEGIN_EXAMPLE
-           supported_template = [
-             {'os': 'UBUNTU', 'version': '12.04',
-              'id': 'ubuntu-12.04-custom-with-emacs-x86_64'}
-           ]
-           #+END_EXAMPLE
-
-      + Configure for a diffetent OS :: If the application is to be
-           deployed on Ubuntu 14.04, do the following
-        1. add the following lines to
-           =/root/ovpl/config/adapters/centos_openvz_config.py=.
-           #+BEGIN_EXAMPLE
-        supported_template = [
-        {'os': 'UBUNTU', 'version': '12.04',
-         'id': 'ubuntu-12.04-custom-with-emacs-x86_64'},
-        {'os': 'UBUNTU', 'version': '14.04',
-         'id': 'ubuntu-14.04_x86_64-custom-emacs-nginx'}
-        #+END_EXAMPLE
-
-        2. download the os template
-           =ubuntu-14.04_x86_64-custom-emacs-nginx.tar.gz=
-           from
-           =http://files.vlabs.ac.in/downloads/templates/=
-           to =/vz/templates/cache/= directory.
-           #+BEGIN_EXAMPLE
-           cd /vz/templates/cache/
-           wget http://files.vlabs.ac.in/downloads/templates/ubuntu-14.04_x86_64-custom-emacs-nginx.tar.gz
-           #+END_EXAMPLE
-
-  12. Setting up ADS-web-app
+      
+ 11. Setting up ADS-web-app
       + Install dependencies This assumes apache server is
         installed. If not, please install the apache server.
       #+BEGIN_EXAMPLE
@@ -165,12 +101,9 @@
       yum install python-pip
       cd /root/ovpl/src/ads-web-app
       python setup.py install
-      
-      rsync -avz --progress /root/ovpl/src/ads-web-app /var/www/html/
-      chmod -R 777 /var/www/html/ads-web-app
       #+END_EXAMPLE
 
-  13. Setup Google Oauth credentials
+  12. Setup Google Oauth credentials
       + Create a project at [[https://console.developers.google.com][Google Dashboard]] and create
         =Oauth= credentials.
       + Steps to create a project
@@ -178,34 +111,30 @@
         2. Click =Create credentials= and select =OAuth
            Client ID=
         3. Select =Web Application=
-        4.  On successful creation of credentials set  =Authorized
-           JavaScript origins= to
+        4. Give the link in =Authorized JavaScript origins= as
            #+BEGIN_EXAMPLE
            http://local-ads.com:8080/
            #+END_EXAMPLE       
-        5. Set Authorized redirect URIs to
-        #+BEGIN_EXAMPLE
-        http://local-ads.com:8080/login/authorized
-        #+END_EXAMPLE5. Mention the following url for =Authorized
-           redirect URI=
+        5. Give the link in =Authorized redirect URIs= as
            #+BEGIN_EXAMPLE
            http://local-ads.com:8080/login/authorized
            #+END_EXAMPLE
-
-      + Provide =CONSUMER_KEY= and =CONSUMER_SECRET= in
-      =/var/www/html/ads-web-app/config.py=.
+        6. Click on create, it prompts a pop-up with
+           =CONSUMER_KEY= and =CONSUMER_SECRET= add them in
+           =/var/www/html/ads-web-app/config.py=.
         #+BEGIN_EXAMPLE
         CONSUMER_KEY = "<consumerkey>" 
         CONSUMER_SECRET = "<consumer secret key>" 
         #+END_EXAMPLE
-  14. Setup ADS credentials in the same file
+  13. Setup ADS credentials in the same file
        =/root/ovpl/src/ads-web-app/config.py=
      + Add email ids to =AUTHORIZED_USERS=
         #+BEGIN_EXAMPLE
         AUTHORIZED_USERS = [ "heregoesemail@gmail.com",
-        "your mail id"
+                             "your mail id"
         ]
         #+END_EXAMPLE
+  14. Copy =/root/ovpl/src/ads-web-app= to =/var/www/html/=
   15. Start ADS services
       + As root, go to =ovpl= directory and run
         =manage_services.sh= file
@@ -231,18 +160,10 @@
         + For more help use =./manage_services.sh --help=.
 
   16. Start the ADS web application service
-      + Set Proxy :: If the network is behind a proxy,
-           export proxy variables.  The below example shows
-           for a network behind =IIIT= proxy. 
-        #+BEGIN_EXAMPLE
-         export http_proxy="http://proxy.iiit.ac.in:8080"
-         export https_proxy="http://proxy.iiit.ac.in:8080"
-        #+END_EXAMPLE
-
       + Run =ads-web-app= service ::
         #+BEGIN_EXAMPLE
-         cd /var/www/html/ads-web-app/
-         python app.py &
+        cd /var/www/html/ads-web-app/
+        python app.py &
         #+END_EXAMPLE
 
   17. The above steps configure the machine and start the
@@ -251,19 +172,10 @@
   18. Set up local DNS entry on the host machine.  This is
       the machine where the browser is started.
 
-      + Edit =/etc/hosts= file on host machine where the ADS
-        application is run from the browser to assign the
+      + Edit =/etc/hosts= file on base machine, assign the
         domain name to =192.168.33.10  local-ads.com=. This is to be done
         for successful redirection page for google
         authorization page
-
-      + Execute below command to reflect the domain name
-        change in =/etc/hosts= (Note :- Below command should
-        be executed on host machine and not on vagrant
-        machine)
-        #+BEGIN_EXAMPLE
-        echo '192.168.33.10 local-ads.com' >> /etc/hosts
-        #+END_EXAMPLE
 
   19. Access =ADS= on browser
       - Open the location =http://local-ads.com:8080= from
