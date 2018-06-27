@@ -178,3 +178,4 @@
         #+BEGIN_EXAMPLE
         tail -f /root/logs/ovpl.log 
         #+END_EXAMPLE
+  20. Add =local-ads.com= in Preferences->No proxy for
