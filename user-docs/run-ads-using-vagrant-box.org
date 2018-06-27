@@ -15,9 +15,8 @@
 * Assumption 
   The developer environment should have installed the
   following software.
-  1. vagrant - any version
-  2. virtualbox: any of the following versions - 4.0.x,
-     4.1.x, 4.2.x, 4.3.x, 5.0.x, and 5.1.x
+  1. vagrant - 1.9.x
+  2. virtualbox: 5.1.26
 
   Please refer [[https://www.vagrantup.com/docs/virtualbox/][virtualbox]] and [[https://www.vagrantup.com/docs/installation/][vagrant]] installation steps for
   installing the above software in development environment.
@@ -170,7 +169,6 @@
       rsync -avz --progress /root/ovpl/src/ads-web-app /var/www/html/
       chmod -R 777 /var/www/html/ads-web-app
       #+END_EXAMPLE
-      
 
   13. Setup Google Oauth credentials
       + Create a project at [[https://console.developers.google.com][Google Dashboard]] and create
@@ -200,15 +198,14 @@
         CONSUMER_KEY = "<consumerkey>" 
         CONSUMER_SECRET = "<consumer secret key>" 
         #+END_EXAMPLE
-
-  14. Setup ADS credentials in the same file =/root/ovpl/src/ads-web-app/config.py=
-      + Add email ids to =AUTHORIZED_USERS=
+  14. Setup ADS credentials in the same file
+       =/root/ovpl/src/ads-web-app/config.py=
+     + Add email ids to =AUTHORIZED_USERS=
         #+BEGIN_EXAMPLE
         AUTHORIZED_USERS = [ "heregoesemail@gmail.com",
         "your mail id"
         ]
         #+END_EXAMPLE
-
   15. Start ADS services
       + As root, go to =ovpl= directory and run
         =manage_services.sh= file
