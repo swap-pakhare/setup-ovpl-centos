@@ -88,9 +88,7 @@
         "HTTPS_PROXY":"http://proxy.iiit.ac.in:8080"
         },
         #+END_EXAMPLE
-      
-      
- 11. Setting up ADS-web-app
+  11. Setting up ADS-web-app
       + Install dependencies This assumes apache server is
         installed. If not, please install the apache server.
       #+BEGIN_EXAMPLE
@@ -102,7 +100,6 @@
       cd /root/ovpl/src/ads-web-app
       python setup.py install
       #+END_EXAMPLE
-
   12. Setup Google Oauth credentials
       + Create a project at [[https://console.developers.google.com][Google Dashboard]] and create
         =Oauth= credentials.
@@ -158,17 +155,14 @@
         ./manage_services.sh start LOGGER 
         #+END_EXAMPLE
         + For more help use =./manage_services.sh --help=.
-
   16. Start the ADS web application service
       + Run =ads-web-app= service ::
         #+BEGIN_EXAMPLE
         cd /var/www/html/ads-web-app/
         python app.py &
         #+END_EXAMPLE
-
   17. The above steps configure the machine and start the
       ADS services.
-
   18. Set up local DNS entry on the host machine.  This is
       the machine where the browser is started.
 
@@ -176,7 +170,6 @@
         domain name to =192.168.33.10  local-ads.com=. This is to be done
         for successful redirection page for google
         authorization page
-
   19. Access =ADS= on browser
       - Open the location =http://local-ads.com:8080= from
         the browser and provide the lab id, lab sources url
