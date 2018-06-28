@@ -99,6 +99,8 @@
       yum install python-pip
       cd /root/ovpl/src/ads-web-app
       python setup.py install
+      rsync -avz --progress /root/ovpl/src/ads-web-app /var/www/html/
+      chmod -R 777 /var/www/html/ads-web-app
       #+END_EXAMPLE
   12. Setup Google Oauth credentials
       + Create a project at [[https://console.developers.google.com][Google Dashboard]] and create
